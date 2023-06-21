@@ -1,0 +1,13 @@
+.DS_Store
+**/.DS_Store
+.DS_Store?
+
+/.idea
+
+/build
+
+/dist
+
+/__main__.spec
+
+.pytest_cache

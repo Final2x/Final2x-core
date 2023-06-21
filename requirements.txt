@@ -1,0 +1,6 @@
+numpy~=1.25.0
+opencv-python~=4.7.0.72
+PyYAML~=6.0
+
+realcugan_ncnn_py
+realesrgan_ncnn_py

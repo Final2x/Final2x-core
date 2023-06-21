@@ -1,0 +1,12 @@
+alphavalue: 0.5
+gpuid: 0
+inputpath:
+  - ./imgs
+  - ./imgs2
+  - ./imgs3
+model: RealCUGAN-pro
+modelscale: 2
+modelnoise: 1
+outputpath: ./output
+targetscale: 2
+tta: true
