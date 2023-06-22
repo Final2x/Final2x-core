@@ -27,6 +27,7 @@ class SRBaseClass(ABC):
 
         print("SRBaseClass init")
 
+    @final
     def _set_sr_n(self) -> None:
         """
         set super-resolution times, when targetscale > modelscale
