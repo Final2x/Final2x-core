@@ -10,7 +10,7 @@ class Test_TARGETSCALE:
         config = SRCONFIG()
         config.getConfigfromJson(CONFIG()[0], CONFIG()[1])
         config.model = "RealCUGAN-pro"
-        for t in [1, 2, 2.5, 4, 5.6619, 8, 10]:
+        for t in [7.99999, 1, 2, 2.5, 4, 5.6619, 8, 10]:
             config.targetscale = t
             SR = REALCUGAN()
             img1 = load_image()

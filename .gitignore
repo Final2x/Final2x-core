@@ -11,3 +11,5 @@
 /__main__.spec
 
 .pytest_cache
+/.coverage
+/htmlcov/
