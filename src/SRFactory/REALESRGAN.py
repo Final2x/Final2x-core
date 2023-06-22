@@ -1,24 +1,43 @@
-import numpy as np
-
 from src.SRFactory.SRBaseClass import SRBaseClass
-from src.utils.getConfig import SRCONFIG
 
 
 class REALESRGAN(SRBaseClass):
     def __init__(self):
         super().__init__()
-        self.config = SRCONFIG()
 
-        self._set_model()
         self._init_SR_class()
-
-    def _set_model(self) -> str:
-        return "REALESRGAN"
 
     def _init_SR_class(self) -> None:
         from src.SRncnn.REALESRGANncnn import REALESRGANncnn
+
+        # model_dict = {
+        #     0: {"param": "realesr-animevideov3-x2.param", "bin": "realesr-animevideov3-x2.bin", "scale": 2},
+        #     1: {"param": "realesr-animevideov3-x3.param", "bin": "realesr-animevideov3-x3.bin", "scale": 3},
+        #     2: {"param": "realesr-animevideov3-x4.param", "bin": "realesr-animevideov3-x4.bin", "scale": 4},
+        #     3: {"param": "realesrgan-x4plus-anime.param", "bin": "realesrgan-x4plus-anime.bin", "scale": 4},
+        #     4: {"param": "realesrgan-x4plus.param", "bin": "realesrgan-x4plus.bin", "scale": 4}
+        # }
         model_i = 0
-        # ["RealESRGAN-animevideov3", "RealESRGAN", "RealESRGAN-anime"]
-        if self.config.model == "RealESRGAN-animevideov3":
-            pass
+        if self._model == "RealESRGAN-animevideov3":
+            if self._modelscale == 2:
+                model_i = 0
+            elif self._modelscale == 3:
+                model_i = 1
+            elif self._modelscale == 4:
+                model_i = 2
+        elif self._model == "RealESRGAN-anime":
+            if self._modelscale == 4:
+                model_i = 3
+            else:
+                print("RealESRGAN-anime only support scale 4")
+                model_i = 3
+        elif self._model == "RealESRGAN":
+            if self._modelscale == 4:
+                model_i = 4
+            else:
+                print("RealESRGAN only support scale 4")
+                model_i = 4
+        else:
+            raise NotImplementedError("model not implemented")
+
         self._SR_class = REALESRGANncnn(gpuid=self._gpuid, model=model_i)
