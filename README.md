@@ -3,4 +3,6 @@
 </p>
 <h1 align="center"> Final2x-core </h1>
 
+[![codecov](https://codecov.io/gh/Tohrusky/Final2x-core/branch/main/graph/badge.svg?token=B2TNKYN4O4)](https://codecov.io/gh/Tohrusky/Final2x-core)
+
 core for Final2x
