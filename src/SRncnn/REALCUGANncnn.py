@@ -44,5 +44,4 @@ class REALCUGANncnn(Realcugan):
                         / f"up{self._scale}x-denoise{self._noise}x.bin"
                 )
 
-        if self._realcugan_object.load(str(param_path), str(model_path)) != 0:
-            raise Exception("Failed to load model")
+        self._realcugan_object.load(str(param_path), str(model_path))

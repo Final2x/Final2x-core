@@ -16,8 +16,7 @@ class SRCONFIG:
         self._model: str = "RealCUGAN-pro"
         self._modelscale: int = 2
         self._modelnoise: int = 0
-        self._alphavalue: float = 1.0
-        self._inputpath: list[str] = []
+        self._inputpath: list = []
 
     def getConfigfromYaml(self, configpath: str = "", modelpath: str = "") -> None:
         self._modelpath: str = modelpath
@@ -37,15 +36,14 @@ class SRCONFIG:
         self._setConfig(config)
 
     def _setConfig(self, config: dict) -> None:
-        self._outputpath: str = config["outputpath"]
-        self._targetscale: float = float(config["targetscale"])
-        self._gpuid: int = config["gpuid"]
-        self._tta: bool = config["tta"]
-        self._model: str = config["model"]
-        self._modelscale: int = config["modelscale"]
-        self._modelnoise: int = config["modelnoise"]
-        self._alphavalue: float = config["alphavalue"]
-        self._inputpath: list[str] = config["inputpath"]
+        self.outputpath = config["outputpath"]
+        self.targetscale = config["targetscale"]
+        self.gpuid = config["gpuid"]
+        self.tta = config["tta"]
+        self.model = config["model"]
+        self.modelscale = config["modelscale"]
+        self.modelnoise = config["modelnoise"]
+        self.inputpath = config["inputpath"]
 
     @property
     def modelpath(self) -> str:
@@ -80,12 +78,22 @@ class SRCONFIG:
         return self._modelnoise
 
     @property
-    def alphavalue(self) -> float:
-        return self._alphavalue
-
-    @property
     def inputpath(self) -> list[str]:
         return self._inputpath
+
+    @outputpath.setter
+    def outputpath(self, value: str) -> None:
+        if type(value) is not str:
+            raise TypeError("outputpath must be str")
+        self._outputpath = value
+
+    @targetscale.setter
+    def targetscale(self, value: Union[int, float]) -> None:
+        if type(value) is not int and type(value) is not float:
+            raise TypeError("targetscale must be int or float")
+        if type(value) is not float:
+            value = float(value)
+        self._targetscale = value
 
     @gpuid.setter
     def gpuid(self, value: int) -> None:
@@ -93,11 +101,11 @@ class SRCONFIG:
             raise TypeError("gpuid must be int")
         self._gpuid = value
 
-    @targetscale.setter
-    def targetscale(self, value: Union[int, float] = None) -> None:
-        if type(value) is not float:
-            value = float(value)
-        self._targetscale = value
+    @tta.setter
+    def tta(self, value: bool) -> None:
+        if type(value) is not bool:
+            raise TypeError("tta must be bool")
+        self._tta = value
 
     @model.setter
     def model(self, value: str) -> None:
@@ -116,3 +124,9 @@ class SRCONFIG:
         if type(value) is not int:
             raise TypeError("modelnoise must be int")
         self._modelnoise = value
+
+    @inputpath.setter
+    def inputpath(self, value: list) -> None:
+        if type(value) is not list:
+            raise TypeError("inputpath must be list")
+        self._inputpath = value

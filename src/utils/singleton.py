@@ -3,7 +3,10 @@ def singleton(cls):
 
     def getinstance(*args, **kw):
         if cls not in instances:
-            instances[cls] = cls(*args, **kw)
+            if isinstance(cls, type):
+                instances[cls] = cls(*args, **kw)
+            else:
+                instances[cls] = cls
         else:
             print("class already exists")
         return instances[cls]

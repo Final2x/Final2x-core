@@ -13,10 +13,6 @@ class REALCUGAN(SRBaseClass):
         if self._model == "RealCUGAN-se":
             model_i = "models-se"
 
-            if self._modelscale not in [2, 3, 4]:
-                print("RealCUGAN-se modelscale should be in [2, 3, 4]. Auto set to 2")
-                self._modelscale = 2
-
             if self._modelscale == 2:
                 if self._modelnoise not in [-1, 0, 1, 2, 3]:
                     print("RealCUGAN-se modelnoise should be in [-1, 0, 1, 2, 3]. Auto set to -1")
@@ -29,6 +25,12 @@ class REALCUGAN(SRBaseClass):
                 if self._modelnoise not in [-1, 0, 3]:
                     print("RealCUGAN-se modelnoise should be in [-1, 0, 3]. Auto set to -1")
                     self._modelnoise = -1
+            else:
+                print("RealCUGAN-se modelscale should be in [2, 3, 4]. Auto set to 2")
+                print("RealCUGAN-se modelnoise should be in [-1, 0, 1, 2, 3]. Auto set to -1")
+                self._modelscale = 2
+                self._modelnoise = -1
+                self._set_sr_n()
 
         elif self._model == "RealCUGAN-pro":
             model_i = "models-pro"
@@ -36,10 +38,12 @@ class REALCUGAN(SRBaseClass):
             if self._modelscale not in [2, 3]:
                 print("RealCUGAN-pro modelscale should be in [2, 3]. Auto set to 2")
                 self._modelscale = 2
+                self._set_sr_n()
 
             if self._modelnoise not in [-1, 0, 3]:
                 print("RealCUGAN-pro modelnoise should be in [-1, 0, 3]. Auto set to -1")
                 self._modelnoise = -1
+
         else:
             raise NotImplementedError("model not implemented")
 

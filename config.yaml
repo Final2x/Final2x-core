@@ -1,4 +1,3 @@
-alphavalue: 0.5
 gpuid: 0
 inputpath:
   - ./imgs
