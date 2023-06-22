@@ -35,7 +35,7 @@ class SRBaseClass(ABC):
         s: int = self._modelscale
         while self._targetscale > s:
             self._sr_n += 1
-            s = s ** s
+            s *= self._modelscale
         print("sr_n set to", self._sr_n)
 
     @abstractmethod
@@ -49,22 +49,20 @@ class SRBaseClass(ABC):
         :param img: img to process
         :return:
         """
-        if self._targetscale <= 0:  # upscale once, resize and return
-            self._target_size = (img.shape[1], img.shape[0])
+        if self._targetscale <= 0:  # upscale once, return directly
+            img = self._process_n(img)
 
         else:  # upscale multiple times
             self._target_size = (math.ceil(img.shape[1] * self._targetscale),
                                  math.ceil(img.shape[0] * self._targetscale))
-
-        img = self._process_n(img)
-
-        img = self._process_downscale(img)
+            img = self._process_n(img)
+            img = self._process_downscale(img)
 
         return img
 
     @final
     def _process_downscale(self, img: np.ndarray) -> np.ndarray:
-        if self._targetscale == self._modelscale ** self._sr_n:
+        if abs(self._targetscale - float(self._modelscale ** self._sr_n)) < 1e-3:
             return img
         # use bicubic interpolation for image downscaling
         img = cv2.resize(img, self._target_size, interpolation=cv2.INTER_CUBIC)
