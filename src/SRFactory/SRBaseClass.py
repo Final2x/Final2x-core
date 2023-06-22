@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 import numpy as np
 import cv2
+import math
 from typing import final
 
 from src.utils.getConfig import SRCONFIG
@@ -9,21 +10,33 @@ from src.utils.getConfig import SRCONFIG
 class SRBaseClass(ABC):
     def __init__(self):
         config = SRCONFIG()
-        self._target_scale = config.targetscale  # user upscale factor
-        self._tta = config.tta  # use tta
-        self._gpuid = config.gpuid  # gpu id, -1 for cpu
+        self._targetscale: float = config.targetscale  # user upscale factor
+        self._gpuid: int = config.gpuid  # gpu id, -1 for cpu
+        self._tta: bool = config.tta  # use tta
+        self._model: str = config.model  # model name
+        self._modelscale: int = config.modelscale  # model upscale factor
+        self._modelnoise: int = config.modelnoise  # model noise level
+        self._alphavalue: float = config.alphavalue  # alpha value for RealCUGAN
 
-        self._model_scale = 2  # model upscale factor, override in child class
-        self._sr_n = 1  # upscale n times, override in child class
+        self._sr_n = 1  # super-resolution times
+        self._set_sr_n()
+
         self._SR_class = None  # upscale model, override in child class
 
         self._target_size: tuple[int, int] = (0, 0)  # target size of the image
 
         print("SRBaseClass init")
 
-    @abstractmethod
-    def _set_model(self) -> str:
-        pass
+    def _set_sr_n(self) -> None:
+        """
+        set super-resolution times, when targetscale > modelscale
+        :return:
+        """
+        s: int = self._modelscale
+        while self._targetscale > s:
+            self._sr_n += 1
+            s = s ** s
+        print("sr_n set to", self._sr_n)
 
     @abstractmethod
     def _init_SR_class(self) -> None:
@@ -31,14 +44,27 @@ class SRBaseClass(ABC):
 
     @final
     def process(self, img: np.ndarray) -> np.ndarray:
-        self._target_size = (int(img.shape[1] * self._target_scale), int(img.shape[0] * self._target_scale))
+        """
+        set target size, and process image
+        :param img: img to process
+        :return:
+        """
+        if self._targetscale <= 0:  # upscale once, resize and return
+            self._target_size = (img.shape[1], img.shape[0])
+
+        else:  # upscale multiple times
+            self._target_size = (math.ceil(img.shape[1] * self._targetscale),
+                                 math.ceil(img.shape[0] * self._targetscale))
+
         img = self._process_n(img)
+
         img = self._process_downscale(img)
+
         return img
 
     @final
     def _process_downscale(self, img: np.ndarray) -> np.ndarray:
-        if self._target_scale == self._model_scale ** self._sr_n:
+        if self._targetscale == self._modelscale ** self._sr_n:
             return img
         # use bicubic interpolation for image downscaling
         img = cv2.resize(img, self._target_size, interpolation=cv2.INTER_CUBIC)
