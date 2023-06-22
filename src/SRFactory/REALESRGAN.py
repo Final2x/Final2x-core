@@ -25,18 +25,30 @@ class REALESRGAN(SRBaseClass):
                 model_i = 1
             elif self._modelscale == 4:
                 model_i = 2
+            else:
+                print("RealESRGAN-animevideov3 only support scale 2, 3, 4")
+                model_i = 0  # default to it
+                self._modelscale = 2
+                self._set_sr_n()
+
         elif self._model == "RealESRGAN-anime":
             if self._modelscale == 4:
                 model_i = 3
             else:
                 print("RealESRGAN-anime only support scale 4")
                 model_i = 3
+                self._modelscale = 4
+                self._set_sr_n()
+
         elif self._model == "RealESRGAN":
             if self._modelscale == 4:
                 model_i = 4
             else:
                 print("RealESRGAN only support scale 4")
                 model_i = 4
+                self._modelscale = 4
+                self._set_sr_n()
+                
         else:
             raise NotImplementedError("model not implemented")
 

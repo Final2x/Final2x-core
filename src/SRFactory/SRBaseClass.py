@@ -16,7 +16,6 @@ class SRBaseClass(ABC):
         self._model: str = config.model  # model name
         self._modelscale: int = config.modelscale  # model upscale factor
         self._modelnoise: int = config.modelnoise  # model noise level
-        self._alphavalue: float = config.alphavalue  # alpha value for RealCUGAN
 
         self._sr_n = 1  # super-resolution times
         self._set_sr_n()
@@ -33,6 +32,8 @@ class SRBaseClass(ABC):
         set super-resolution times, when targetscale > modelscale
         :return:
         """
+        if self._modelscale <= 1:  # 1x model, or wrong model scale, call again this method in child class
+            return
         s: int = self._modelscale
         while self._targetscale > s:
             self._sr_n += 1

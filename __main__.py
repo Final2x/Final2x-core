@@ -15,3 +15,5 @@ else:
 
 print("projectPATH: ", projectPATH)
 print("time: ", time.time() - t1)
+
+# python -m pytest --cov=src --cov-report=html
