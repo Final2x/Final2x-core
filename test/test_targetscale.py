@@ -35,4 +35,5 @@ class Test_TARGETSCALE:
             print("img1.shape: ", img1.shape)
             print("img2.shape: ", img2.shape)
             assert calculate_image_similarity(img1, img2)
-            assert img2.shape[0] == img1.shape[0] and img2.shape[1] == img1.shape[1]
+            assert img2.shape[0] == img1.shape[0] * config.modelscale and \
+                   img2.shape[1] == img1.shape[1] * config.modelscale

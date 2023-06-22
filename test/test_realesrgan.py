@@ -4,7 +4,7 @@ from test.util import load_image, CONFIG, calculate_image_similarity
 from src.utils.getConfig import SRCONFIG
 
 
-class Test_REALESSRGAN:
+class Test_REALESRGAN:
     @pytest.mark.skipif(CONFIG()[2] == -1, reason="Skipping test due to use CPU")
     def test_case_RealESRGAN_animevideov3(self):
         from src.SRFactory import REALESRGAN
