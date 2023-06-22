@@ -41,7 +41,10 @@ class SRBaseClass(ABC):
 
     @abstractmethod
     def _init_SR_class(self) -> None:
-        pass
+        """
+        init SR_class, override in child class
+        :return:
+        """
 
     @final
     def process(self, img: np.ndarray) -> np.ndarray:
