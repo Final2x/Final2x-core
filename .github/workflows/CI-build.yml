@@ -1,0 +1,91 @@
+name: CI-build
+
+# Controls when the workflow will run
+on:
+  # Triggers the workflow on push or pull request events but only for the "main" branch
+  push:
+    branches: [ "main" ]
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+
+  pull_request:
+    branches: [ "main" ]
+    paths-ignore:
+      - '**.md'
+      - 'LICENSE'
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  CI:
+    strategy:
+      matrix:
+        python-version: [ "3.9" ]
+        os-version: [ "macos-latest", "windows-latest", "ubuntu-20.04" ]
+
+    runs-on: ${{ matrix.os-version }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+
+      - name: vulkan dll
+        if: matrix.os-version == 'windows-latest'
+        run: echo F | xcopy .\assets\vulkan-1.dll C:\Windows\System32
+
+      - name: Build
+        run: |
+          cd tests
+          pip install -r test_requirements.txt
+          cd ..
+          pip install -r requirements.txt
+          pip install pyinstaller
+          python -m PyInstaller -n Final2x-core -i assets/favicon.ico __main__.py
+
+      - name: cp-windows
+        if: matrix.os-version == 'windows-latest'
+        run: |
+          xcopy config.yaml dist\Final2x-core
+          xcopy models dist\Final2x-core\models /E /I /H /Y
+          cd dist\Final2x-core
+          7z a -r Final2x-core-${{ matrix.os-version }}.zip *
+
+      - name: cp-unix
+        if: matrix.os-version != 'windows-latest'
+        run: |
+          cp config.yaml dist/Final2x-core
+          cp -r models dist/Final2x-core
+          cd dist/Final2x-core
+          zip -9 -r Final2x-core-${{ matrix.os-version }}.zip ./*
+
+      - name: upload
+        uses: actions/upload-artifact@v3
+        with:
+          name: Final2x-core-${{ matrix.os-version }}
+          path: dist/Final2x-core/Final2x-core-${{ matrix.os-version }}.zip
+
+      - name: Test
+        run: |
+          cd test
+          python CIsetconfig.py
+
+      - name: Test-windows
+        if: matrix.os-version == 'windows-latest'
+        run: |
+          xcopy config.yaml dist\Final2x-core
+          cd dist\Final2x-core
+          .\Final2x-core
+
+      - name: Test-unix
+        if: matrix.os-version != 'windows-latest'
+        run: |
+          cp config.yaml dist/Final2x-core
+          cd dist/Final2x-core
+          ./Final2x-core
