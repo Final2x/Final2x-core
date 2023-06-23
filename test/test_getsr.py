@@ -5,7 +5,7 @@ from test.util import load_image, getSRCONFIG, CONFIG, calculate_image_similarit
 
 
 class Test_GETSR:
-    def test_case_FAKECLASS_error(self):
+    def test_case_invalid_model(self):
         from src.SRFactory import SRFactory
         config = getSRCONFIG()
         config.model = "1145141919810"

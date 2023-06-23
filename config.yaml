@@ -1,11 +1,15 @@
 gpuid: 0
 inputpath:
-  - ./imgs
-  - ./imgs2
-  - ./imgs3
+  - /1/1/4/5/1/4/1/9/1/9/8/1/0.jpg
+  - /Users/tohru/Downloads/Final2x-core/assets/herta.jpg
+  - /Users/tohru/Downloads/Final2x-core/assets/herta.jpg
+  - /Users/tohru/Downloads/Final2x-core/assets/herta.jpg
+  - /Users/tohru/Downloads/Final2x-core/assets/final2x-10.png
+  - /Users/tohru/Downloads/Final2x-core/assets/final2x-20.png
+  - /Users/tohru/Downloads/Final2x-core/assets/final2x-40.png
 model: RealCUGAN-pro
 modelscale: 2
 modelnoise: 1
-outputpath: ./output
-targetscale: 2
+outputpath: /Users/tohru/Downloads/Final2x-core/assets
+targetscale: 4
 tta: true

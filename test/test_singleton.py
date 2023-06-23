@@ -2,7 +2,7 @@ from src.utils.getConfig import SRCONFIG
 from src.utils.singleton import singleton
 
 
-class Test_singleton:
+class Test_SINGLETON:
     def test_config_class(self):
         c1 = SRCONFIG()
         c2 = SRCONFIG()

@@ -1,8 +1,7 @@
 import cv2
 import numpy as np
-import pytest
-import os
-import pathlib
+import json
+from pathlib import Path
 from skimage.metrics import structural_similarity
 
 from src.utils.getConfig import SRCONFIG
@@ -19,12 +18,34 @@ def load_image() -> np.ndarray:
 
 
 def CONFIG() -> tuple[int, str, str, str]:
+    projectPATH = Path(__file__).resolve().parent.parent.absolute()
+
     gpuid: int = 0  # -1 for CPU, > 0 for GPU
+    p_dict = {
+        "gpuid"      : gpuid,
+        "inputpath"  : [
+            "./1/1/4/5/1/4/1/9/1/9/8/1/0.jpg",
+            str(projectPATH / "test" / "imgs" / "herta.jpg"),
+            str(projectPATH / "test" / "imgs" / "herta.jpg"),
+            str(projectPATH / "assets" / "final2x-10.png"),
+            str(projectPATH / "assets" / "final2x-20.png"),
+            str(projectPATH / "assets" / "final2x-40.png"),
+            str(projectPATH / "assets" / "final2x-80.png"),
+            str(projectPATH / "assets" / "final2x-160.png"),
+            str(projectPATH / "assets" / "final2x-320.png"),
+            str(projectPATH / "assets" / "final2x-640.png"),
+            str(projectPATH / "assets" / "final2x-1280.png"),
+        ],
+        "model"      : "RealCUGAN-pro",
+        "modelscale" : 2,
+        "modelnoise" : 1,
+        "outputpath" : str(projectPATH / "assets"),
+        "targetscale": 2,
+        "tta"        : True
+    }
 
-    p_json: str = r'{"gpuid":' + str(gpuid) + r',"inputpath":["./imgs","./imgs2","./imgs3"],"model":"RealCUGAN-pro",' + \
-                  r'"modelscale":2,"modelnoise":1,"outputpath":"./output","targetscale":2,"tta":true}'
+    p_json: str = json.dumps(p_dict)
 
-    projectPATH = pathlib.Path(os.path.abspath(os.path.dirname(os.path.dirname(os.path.realpath(__file__)))))
     p_model: str = str(projectPATH / "models")
     p_yaml = str(projectPATH / "config.yaml")
 

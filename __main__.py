@@ -1,19 +1,32 @@
-import os
-import pathlib
+import argparse
 import sys
-import time
+from pathlib import Path
+from loguru import logger
 
-from src.SR import SR_queue
-
-t1 = time.time()
-if getattr(sys, 'frozen', False):
-    # frozen
-    projectPATH = pathlib.Path(os.path.abspath(os.path.dirname(sys.executable)))
-else:
-    # unfrozen
-    projectPATH = pathlib.Path(os.path.abspath(os.path.dirname(os.path.realpath(__file__))))
-
-print("projectPATH: ", projectPATH)
-print("time: ", time.time() - t1)
+from src.SRqueue import SR_queue
+from src.utils.getConfig import SRCONFIG
 
 # python -m pytest --cov=src --cov-report=html
+if getattr(sys, 'frozen', False):
+    # frozen
+    projectPATH = Path(sys.executable).parent.absolute()
+else:
+    # unfrozen
+    projectPATH = Path(__file__).resolve().parent.absolute()
+
+logger.add(projectPATH / "logs" / "log-{time}.log", encoding="utf-8", retention="60 days")
+
+logger.info("projectPATH: " + str(projectPATH))
+
+parser = argparse.ArgumentParser()
+parser.description = "when -j is not specified, the config.yaml file in the directory will be read automatically"
+parser.add_argument("-j", "--JSON", help="JSON str for config", type=str)
+args = parser.parse_args()
+
+config = SRCONFIG()
+if args.JSON is None:
+    config.getConfigfromYaml(str(projectPATH / "config.yaml"), str(projectPATH / "models"))
+else:
+    config.getConfigfromJson(str(args.JSON), str(projectPATH / "models"))
+
+SR_queue()

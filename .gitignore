@@ -9,3 +9,5 @@
 /.coverage
 /htmlcov/
 /coverage.xml
+/logs/
+/assets/outputs/
