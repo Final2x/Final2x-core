@@ -1,7 +1,7 @@
 import sys
 import pytest
 
-from tests.util import load_image, CONFIG, getSRCONFIG, calculate_image_similarity
+from tests.util import load_image, CONFIG, getSRCONFIG, calculate_image_similarity, compare_image_size
 
 
 @pytest.mark.skipif(sys.platform == "darwin", reason="Skipping test when running on macOS")
@@ -17,6 +17,7 @@ class Test_REALESRGAN:
             img1 = load_image()
             img2 = SR.process(img1)
             assert calculate_image_similarity(img1, img2)
+            assert compare_image_size(img1, img2, config.targetscale)
 
     @pytest.mark.skipif(CONFIG()[0] == -1, reason="Skipping test due to use CPU")
     def test_case_RealESRGAN_anime(self):
@@ -29,6 +30,7 @@ class Test_REALESRGAN:
             img1 = load_image()
             img2 = SR.process(img1)
             assert calculate_image_similarity(img1, img2)
+            assert compare_image_size(img1, img2, config.targetscale)
 
     @pytest.mark.skipif(CONFIG()[0] == -1, reason="Skipping test due to use CPU")
     def test_case_RealESRGAN(self):
@@ -41,6 +43,7 @@ class Test_REALESRGAN:
             img1 = load_image()
             img2 = SR.process(img1)
             assert calculate_image_similarity(img1, img2)
+            assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_invalid_model(self):
         from src.SRFactory import REALESRGAN

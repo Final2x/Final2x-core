@@ -31,8 +31,7 @@ class REALESRGAN(SRBaseClass):
             else:
                 logger.warning("RealESRGAN-animevideov3 only support scale 2, 3, 4. Auto set to 2")
                 model_i = 0  # default to it
-                self._modelscale = 2
-                self._set_sr_n()
+                self._reset_modelscale(2)
 
         elif self._model == "RealESRGAN-anime":
             if self._modelscale == 4:
@@ -40,8 +39,7 @@ class REALESRGAN(SRBaseClass):
             else:
                 logger.warning("RealESRGAN-anime only support scale 4. Auto set to 4")
                 model_i = 3
-                self._modelscale = 4
-                self._set_sr_n()
+                self._reset_modelscale(4)
 
         elif self._model == "RealESRGAN":
             if self._modelscale == 4:
@@ -49,8 +47,7 @@ class REALESRGAN(SRBaseClass):
             else:
                 logger.warning("RealESRGAN only support scale 4. Auto set to 4")
                 model_i = 4
-                self._modelscale = 4
-                self._set_sr_n()
+                self._reset_modelscale(4)
 
         else:
             logger.error("RealESRGAN model not implemented")

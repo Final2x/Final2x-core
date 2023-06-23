@@ -38,10 +38,27 @@ class Test_GETSR:
             SR = SRFactory.getSR()
             assert type(SR).__name__ == "WAIFU2X"
 
+    @pytest.mark.skipif(CONFIG()[0] == -1 or sys.platform == "darwin", reason="Skipping test due to use CPU or macOS")
+    def test_case_SRMD(self):
+        from src.SRFactory import SRFactory
+        config = getSRCONFIG()
+        for m in ["SRMD"]:
+            config.model = m
+            SR = SRFactory.getSR()
+            assert type(SR).__name__ == "SRMD"
+
     def test_case_get_REALESRGAN_error(self):
         from src.SRFactory import SRFactory
         config = getSRCONFIG()
-        config.model = "sb"
+        config.model = "RealESRGAN"
+        config.gpuid = -1
+        with pytest.raises(Exception):
+            _ = SRFactory.getSR()
+
+    def test_case_get_SRMD_error(self):
+        from src.SRFactory import SRFactory
+        config = getSRCONFIG()
+        config.model = "SRMD"
         config.gpuid = -1
         with pytest.raises(Exception):
             _ = SRFactory.getSR()

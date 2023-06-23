@@ -1,7 +1,7 @@
 import sys
 import pytest
 
-from tests.util import load_image, CONFIG, getSRCONFIG, calculate_image_similarity
+from tests.util import load_image, CONFIG, getSRCONFIG, calculate_image_similarity, compare_image_size
 
 
 @pytest.mark.skipif(sys.platform == "darwin", reason="Skipping test when running on macOS")
@@ -18,6 +18,7 @@ class Test_WAIFU2X:
                 img1 = load_image()
                 img2 = SR.process(img1)
                 assert calculate_image_similarity(img1, img2)
+                assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_Waifu2x_upconv_7_anime_style_art_rgb(self):
         from src.SRFactory import WAIFU2X
@@ -31,6 +32,7 @@ class Test_WAIFU2X:
                 img1 = load_image()
                 img2 = SR.process(img1)
                 assert calculate_image_similarity(img1, img2)
+                assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_Waifu2x_upconv_7_photo(self):
         from src.SRFactory import WAIFU2X
@@ -44,6 +46,7 @@ class Test_WAIFU2X:
                 img1 = load_image()
                 img2 = SR.process(img1)
                 assert calculate_image_similarity(img1, img2)
+                assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_invalid_model(self):
         from src.SRFactory import WAIFU2X

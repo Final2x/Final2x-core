@@ -34,7 +34,7 @@ class SRBaseClass(ABC):
         set super-resolution times, when targetscale > modelscale
         :return:
         """
-        if self._modelscale <= 1:  # 1x model, or wrong model scale, call again this method in child class
+        if self._modelscale <= 1:  # 1x model, or wrong model scale, call _reset_modelscale to set it
             return
         s: int = self._modelscale
         while self._targetscale > s:
@@ -83,3 +83,15 @@ class SRBaseClass(ABC):
         for _ in range(self._sr_n):
             img = self._SR_class.process_cv2(img)
         return img
+
+    @final
+    @logger.catch
+    def _reset_modelscale(self, modelscale: int) -> None:
+        """
+        reset modelscale, and call _set_sr_n
+        :param modelscale: reseted scale factor of the model
+        :return:
+        """
+        self._modelscale = modelscale
+        logger.info("modelscale reset to " + str(self._modelscale))
+        self._set_sr_n()
