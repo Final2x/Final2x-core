@@ -1,4 +1,7 @@
 def singleton(cls):
+    """
+    singleton decorator
+    """
     instances = {}
 
     def getinstance(*args, **kw):
@@ -7,8 +10,7 @@ def singleton(cls):
                 instances[cls] = cls(*args, **kw)
             else:
                 instances[cls] = cls
-        else:
-            print("class already exists")
+
         return instances[cls]
 
     if isinstance(cls, type):

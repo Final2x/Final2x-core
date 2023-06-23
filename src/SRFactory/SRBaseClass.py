@@ -3,6 +3,7 @@ import numpy as np
 import cv2
 import math
 from typing import final
+from loguru import logger
 
 from src.utils.getConfig import SRCONFIG
 
@@ -24,9 +25,10 @@ class SRBaseClass(ABC):
 
         self._target_size: tuple[int, int] = (0, 0)  # target size of the image
 
-        print("SRBaseClass init")
+        logger.info("SRBaseClass init")
 
     @final
+    @logger.catch
     def _set_sr_n(self) -> None:
         """
         set super-resolution times, when targetscale > modelscale
@@ -38,7 +40,7 @@ class SRBaseClass(ABC):
         while self._targetscale > s:
             self._sr_n += 1
             s *= self._modelscale
-        print("sr_n set to", self._sr_n)
+        logger.info("sr_n set to", self._sr_n)
 
     @abstractmethod
     def _init_SR_class(self) -> None:
@@ -48,6 +50,7 @@ class SRBaseClass(ABC):
         """
 
     @final
+    @logger.catch
     def process(self, img: np.ndarray) -> np.ndarray:
         """
         set target size, and process image
@@ -66,6 +69,7 @@ class SRBaseClass(ABC):
         return img
 
     @final
+    @logger.catch
     def _process_downscale(self, img: np.ndarray) -> np.ndarray:
         if abs(self._targetscale - float(self._modelscale ** self._sr_n)) < 1e-3:
             return img
@@ -74,6 +78,7 @@ class SRBaseClass(ABC):
         return img
 
     @final
+    @logger.catch
     def _process_n(self, img: np.ndarray) -> np.ndarray:
         for _ in range(self._sr_n):
             img = self._SR_class.process_cv2(img)

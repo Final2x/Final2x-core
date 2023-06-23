@@ -1,3 +1,5 @@
+from loguru import logger
+
 from src.SRFactory.SRBaseClass import SRBaseClass
 
 
@@ -7,6 +9,7 @@ class REALESRGAN(SRBaseClass):
 
         self._init_SR_class()
 
+    @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
         from src.SRncnn.REALESRGANncnn import REALESRGANncnn
 
@@ -26,7 +29,7 @@ class REALESRGAN(SRBaseClass):
             elif self._modelscale == 4:
                 model_i = 2
             else:
-                print("RealESRGAN-animevideov3 only support scale 2, 3, 4")
+                logger.warning("RealESRGAN-animevideov3 only support scale 2, 3, 4. Auto set to 2")
                 model_i = 0  # default to it
                 self._modelscale = 2
                 self._set_sr_n()
@@ -35,7 +38,7 @@ class REALESRGAN(SRBaseClass):
             if self._modelscale == 4:
                 model_i = 3
             else:
-                print("RealESRGAN-anime only support scale 4")
+                logger.warning("RealESRGAN-anime only support scale 4. Auto set to 4")
                 model_i = 3
                 self._modelscale = 4
                 self._set_sr_n()
@@ -44,12 +47,14 @@ class REALESRGAN(SRBaseClass):
             if self._modelscale == 4:
                 model_i = 4
             else:
-                print("RealESRGAN only support scale 4")
+                logger.warning("RealESRGAN only support scale 4. Auto set to 4")
                 model_i = 4
                 self._modelscale = 4
                 self._set_sr_n()
-                
+
         else:
+            logger.error("model not implemented")
             raise NotImplementedError("model not implemented")
 
         self._SR_class = REALESRGANncnn(gpuid=self._gpuid, model=model_i)
+        logger.info("RealESRGAN model loaded")

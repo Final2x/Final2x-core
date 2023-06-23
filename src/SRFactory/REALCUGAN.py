@@ -1,3 +1,5 @@
+from loguru import logger
+
 from src.SRFactory.SRBaseClass import SRBaseClass
 
 
@@ -7,6 +9,7 @@ class REALCUGAN(SRBaseClass):
 
         self._init_SR_class()
 
+    @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
         from src.SRncnn.REALCUGANncnn import REALCUGANncnn
 
@@ -15,19 +18,19 @@ class REALCUGAN(SRBaseClass):
 
             if self._modelscale == 2:
                 if self._modelnoise not in [-1, 0, 1, 2, 3]:
-                    print("RealCUGAN-se modelnoise should be in [-1, 0, 1, 2, 3]. Auto set to -1")
+                    logger.warning("RealCUGAN-se modelnoise should be in [-1, 0, 1, 2, 3]. Auto set to -1")
                     self._modelnoise = -1
             elif self._modelscale == 3:
                 if self._modelnoise not in [-1, 0, 3]:
-                    print("RealCUGAN-se modelnoise should be in [-1, 0, 3]. Auto set to -1")
+                    logger.warning("RealCUGAN-se modelnoise should be in [-1, 0, 3]. Auto set to -1")
                     self._modelnoise = -1
             elif self._modelscale == 4:
                 if self._modelnoise not in [-1, 0, 3]:
-                    print("RealCUGAN-se modelnoise should be in [-1, 0, 3]. Auto set to -1")
+                    logger.warning("RealCUGAN-se modelnoise should be in [-1, 0, 3]. Auto set to -1")
                     self._modelnoise = -1
             else:
-                print("RealCUGAN-se modelscale should be in [2, 3, 4]. Auto set to 2")
-                print("RealCUGAN-se modelnoise should be in [-1, 0, 1, 2, 3]. Auto set to -1")
+                logger.warning("RealCUGAN-se modelscale should be in [2, 3, 4]. Auto set to 2")
+                logger.warning("RealCUGAN-se modelnoise should be in [-1, 0, 1, 2, 3]. Auto set to -1")
                 self._modelscale = 2
                 self._modelnoise = -1
                 self._set_sr_n()
@@ -36,16 +39,18 @@ class REALCUGAN(SRBaseClass):
             model_i = "models-pro"
 
             if self._modelscale not in [2, 3]:
-                print("RealCUGAN-pro modelscale should be in [2, 3]. Auto set to 2")
+                logger.warning("RealCUGAN-pro modelscale should be in [2, 3]. Auto set to 2")
                 self._modelscale = 2
                 self._set_sr_n()
 
             if self._modelnoise not in [-1, 0, 3]:
-                print("RealCUGAN-pro modelnoise should be in [-1, 0, 3]. Auto set to -1")
+                logger.warning("RealCUGAN-pro modelnoise should be in [-1, 0, 3]. Auto set to -1")
                 self._modelnoise = -1
 
         else:
+            logger.error("model not implemented")
             raise NotImplementedError("model not implemented")
 
         self._SR_class = REALCUGANncnn(gpuid=self._gpuid, model=model_i, noise=self._modelnoise,
                                        scale=self._modelscale)
+        logger.info("RealCUGAN model initialized")
