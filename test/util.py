@@ -18,6 +18,10 @@ def CONFIG() -> tuple[int, str, str, str]:
     projectPATH = Path(__file__).resolve().parent.parent.absolute()
 
     gpuid: int = 0  # -1 for CPU, > 0 for GPU
+    # use cpu if gpu is not available
+    if not cv2.ocl.haveOpenCL():
+        gpuid = -1
+
     p_dict = {
         "gpuid"      : gpuid,
         "inputpath"  : [
