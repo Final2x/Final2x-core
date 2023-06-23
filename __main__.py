@@ -1,6 +1,7 @@
 import argparse
 import sys
 from pathlib import Path
+import cv2
 from loguru import logger
 
 from src.SRqueue import SR_queue
@@ -29,6 +30,12 @@ if args.JSON is None:
     config.getConfigfromYaml(str(projectPATH / "config.yaml"), str(projectPATH / "models"))
 else:
     config.getConfigfromJson(str(args.JSON), str(projectPATH / "models"))
+
+logger.info("config loaded")
+# use cpu if gpu is not available
+if not cv2.ocl.haveOpenCL() and config.gpuid != -1:
+    logger.warning("gpu is not available, use cpu instead")
+    config.gpuid = -1
 
 SR_queue()
 

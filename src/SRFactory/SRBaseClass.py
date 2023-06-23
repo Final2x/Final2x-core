@@ -40,7 +40,7 @@ class SRBaseClass(ABC):
         while self._targetscale > s:
             self._sr_n += 1
             s *= self._modelscale
-        logger.info("sr_n set to" + str(self._sr_n))
+        logger.info("sr_n set to " + str(self._sr_n))
 
     @abstractmethod
     def _init_SR_class(self) -> None:
