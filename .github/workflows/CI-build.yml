@@ -79,13 +79,13 @@ jobs:
       - name: Test-windows
         if: matrix.os-version == 'windows-latest'
         run: |
-          xcopy config.yaml dist\Final2x-core
+          xcopy config.yaml dist\Final2x-core /Y
           cd dist\Final2x-core
           .\Final2x-core
 
       - name: Test-unix
         if: matrix.os-version != 'windows-latest'
         run: |
-          cp config.yaml dist/Final2x-core
+          cp -f config.yaml dist/Final2x-core
           cd dist/Final2x-core
           ./Final2x-core
