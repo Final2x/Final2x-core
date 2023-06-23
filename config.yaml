@@ -1,15 +1,19 @@
 gpuid: 0
 inputpath:
-  - /1/1/4/5/1/4/1/9/1/9/8/1/0.jpg
-  - /Users/tohru/Downloads/Final2x-core/assets/herta.jpg
-  - /Users/tohru/Downloads/Final2x-core/assets/herta.jpg
-  - /Users/tohru/Downloads/Final2x-core/assets/herta.jpg
-  - /Users/tohru/Downloads/Final2x-core/assets/final2x-10.png
-  - /Users/tohru/Downloads/Final2x-core/assets/final2x-20.png
-  - /Users/tohru/Downloads/Final2x-core/assets/final2x-40.png
+- ./1/1/4/5/1/4/1/9/1/9/8/1/0.jpg
+- /Users/tohru/Downloads/Final2x-core/assets/herta.jpg
+- /Users/tohru/Downloads/Final2x-core/assets/herta.jpg
+- /Users/tohru/Downloads/Final2x-core/assets/final2x-10.png
+- /Users/tohru/Downloads/Final2x-core/assets/final2x-20.png
+- /Users/tohru/Downloads/Final2x-core/assets/final2x-40.png
+- /Users/tohru/Downloads/Final2x-core/assets/final2x-80.png
+- /Users/tohru/Downloads/Final2x-core/assets/final2x-160.png
+- /Users/tohru/Downloads/Final2x-core/assets/final2x-320.png
+- /Users/tohru/Downloads/Final2x-core/assets/final2x-640.png
+- /Users/tohru/Downloads/Final2x-core/assets/final2x-1280.png
 model: RealCUGAN-pro
-modelscale: 2
 modelnoise: 1
+modelscale: 2
 outputpath: /Users/tohru/Downloads/Final2x-core/assets
-targetscale: 4
+targetscale: 2
 tta: true
