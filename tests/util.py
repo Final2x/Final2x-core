@@ -46,7 +46,7 @@ def CONFIG() -> tuple[int, str, str, str]:
         "modelnoise" : 1,
         "outputpath" : str(projectPATH / "assets"),
         "targetscale": 2,
-        "tta"        : True
+        "tta"        : False,
     }
 
     p_json: str = json.dumps(p_dict)

@@ -53,8 +53,8 @@ class REALESRGAN(SRBaseClass):
                 self._set_sr_n()
 
         else:
-            logger.error("model not implemented")
-            raise NotImplementedError("model not implemented")
+            logger.error("RealESRGAN model not implemented")
+            raise NotImplementedError("RealESRGAN model not implemented")
 
-        self._SR_class = REALESRGANncnn(gpuid=self._gpuid, model=model_i)
+        self._SR_class = REALESRGANncnn(gpuid=self._gpuid, model=model_i, tta_mode=self._tta)
         logger.info("RealESRGAN model loaded")

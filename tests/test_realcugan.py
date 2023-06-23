@@ -9,8 +9,8 @@ class Test_REALCUGAN:
         config = getSRCONFIG()
         config.model = "RealCUGAN-pro"
         # test invalid scale and noise
-        for s in range(1, 4):
-            for n in range(-2, 4):
+        for s in range(1, 5):
+            for n in range(-2, 5):
                 config.modelscale = s
                 config.modelnoise = n
                 SR = REALCUGAN()
@@ -22,8 +22,8 @@ class Test_REALCUGAN:
         from src.SRFactory import REALCUGAN
         config = getSRCONFIG()
         config.model = "RealCUGAN-se"
-        for s in range(1, 5):
-            for n in range(-1, 5):
+        for s in range(1, 6):
+            for n in range(-2, 5):
                 config.modelscale = s
                 config.modelnoise = n
                 SR = REALCUGAN()
@@ -37,5 +37,3 @@ class Test_REALCUGAN:
         config.model = "sb"
         with pytest.raises(NotImplementedError):
             SR = REALCUGAN()
-            img1 = load_image()
-            _ = SR.process(img1)
