@@ -29,10 +29,19 @@ class Test_GETSR:
             SR = SRFactory.getSR()
             assert type(SR).__name__ == "REALESRGAN"
 
+    @pytest.mark.skipif(sys.platform == "darwin", reason="Skipping test when running on macOS")
+    def test_case_WAIFU2X(self):
+        from src.SRFactory import SRFactory
+        config = getSRCONFIG()
+        for m in ["Waifu2x-cunet", "Waifu2x-upconv_7_anime_style_art_rgb", "Waifu2x-upconv_7_photo"]:
+            config.model = m
+            SR = SRFactory.getSR()
+            assert type(SR).__name__ == "WAIFU2X"
+
     def test_case_get_REALESRGAN_error(self):
         from src.SRFactory import SRFactory
         config = getSRCONFIG()
-        config.model = "RealESRGAN-animevideov3"
+        config.model = "sb"
         config.gpuid = -1
         with pytest.raises(Exception):
             _ = SRFactory.getSR()

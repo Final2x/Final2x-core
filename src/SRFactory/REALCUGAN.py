@@ -48,9 +48,9 @@ class REALCUGAN(SRBaseClass):
                 self._modelnoise = -1
 
         else:
-            logger.error("model not implemented")
-            raise NotImplementedError("model not implemented")
+            logger.error("RealCUGAN model not implemented")
+            raise NotImplementedError("RealCUGAN model not implemented")
 
         self._SR_class = REALCUGANncnn(gpuid=self._gpuid, model=model_i, noise=self._modelnoise,
-                                       scale=self._modelscale)
+                                       scale=self._modelscale, tta_mode=self._tta, )
         logger.info("RealCUGAN model initialized")

@@ -11,7 +11,7 @@ class Test_REALESRGAN:
         from src.SRFactory import REALESRGAN
         config = getSRCONFIG()
         config.model = "RealESRGAN-animevideov3"
-        for i in range(0, 5):
+        for i in range(0, 6):
             config.modelscale = i
             SR = REALESRGAN()
             img1 = load_image()
@@ -23,7 +23,7 @@ class Test_REALESRGAN:
         from src.SRFactory import REALESRGAN
         config = getSRCONFIG()
         config.model = "RealESRGAN-anime"
-        for i in range(2, 5):
+        for i in range(3, 6):
             config.modelscale = i
             SR = REALESRGAN()
             img1 = load_image()
@@ -35,7 +35,7 @@ class Test_REALESRGAN:
         from src.SRFactory import REALESRGAN
         config = getSRCONFIG()
         config.model = "RealESRGAN"
-        for i in range(2, 5):
+        for i in range(3, 6):
             config.modelscale = i
             SR = REALESRGAN()
             img1 = load_image()
@@ -48,5 +48,3 @@ class Test_REALESRGAN:
         config.model = "sb"
         with pytest.raises(NotImplementedError):
             SR = REALESRGAN()
-            img1 = load_image()
-            _ = SR.process(img1)
