@@ -1,7 +1,7 @@
 import pytest
 
 from src.utils.getConfig import SRCONFIG
-from test.util import load_image, CONFIG, calculate_image_similarity
+from tests.util import load_image, CONFIG, calculate_image_similarity
 
 
 class Test_SRCONFIG:

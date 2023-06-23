@@ -1,6 +1,6 @@
 import math
 
-from test.util import load_image, getSRCONFIG, calculate_image_similarity
+from tests.util import load_image, getSRCONFIG, calculate_image_similarity
 
 
 class Test_TARGETSCALE:
