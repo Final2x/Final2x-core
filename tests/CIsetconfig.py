@@ -2,13 +2,11 @@ import cv2
 import yaml
 from pathlib import Path
 
-if __name__ == '__main__':
+
+def GithubAction_CPU_setconfig():
     projectPATH = Path(__file__).resolve().parent.parent.absolute()
 
-    gpuid: int = 0  # -1 for CPU, > 0 for GPU
-    # use cpu if gpu is not available
-    if not cv2.ocl.haveOpenCL():
-        gpuid = -1
+    gpuid: int = -1  # -1 for CPU, > 0 for GPU
 
     print(f"gpuid: {gpuid}")
 
@@ -43,3 +41,7 @@ if __name__ == '__main__':
 
     with open(p_yaml, 'w', encoding='utf-8') as f:
         yaml.safe_dump(p_dict, f)
+
+
+if __name__ == '__main__':
+    GithubAction_CPU_setconfig()
