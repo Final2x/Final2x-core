@@ -1,0 +1,92 @@
+name: Release
+
+on:
+  workflow_dispatch:
+
+jobs:
+
+  setup:
+    runs-on: ubuntu-latest
+    outputs:
+      DATE: ${{ steps.get_date.outputs.DATE }}
+    steps:
+      - name: Get current date
+        id: get_date
+        run: echo "DATE=$(date +'%Y-%m-%d')" >> $GITHUB_OUTPUT
+
+  Build:
+    strategy:
+      matrix:
+        python-version: [ "3.9" ]
+        os-version: [ "macos-latest", "windows-latest", "ubuntu-20.04" ]
+
+    runs-on: ${{ matrix.os-version }}
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+
+      - name: vulkan dll
+        if: matrix.os-version == 'windows-latest'
+        run: echo F | xcopy .\assets\vulkan-1.dll C:\Windows\System32
+
+      - name: Build
+        run: |
+          cd tests
+          pip install -r test_requirements.txt
+          cd ..
+          pip install -r requirements.txt
+          pip install pyinstaller
+          python -m PyInstaller -n Final2x-core -i assets/favicon.ico __main__.py
+
+      - name: cp-windows
+        if: matrix.os-version == 'windows-latest'
+        run: |
+          xcopy config.yaml dist\Final2x-core
+          xcopy models dist\Final2x-core\models /E /I /H /Y
+          cd dist\Final2x-core
+          7z a -r Final2x-core-${{ matrix.os-version }}.zip *
+
+      - name: cp-unix
+        if: matrix.os-version != 'windows-latest'
+        run: |
+          cp config.yaml dist/Final2x-core
+          cp -r models dist/Final2x-core
+          cd dist/Final2x-core
+          zip -9 -r Final2x-core-${{ matrix.os-version }}.zip ./*
+
+      - name: upload
+        uses: actions/upload-artifact@v3
+        with:
+          path: dist/Final2x-core/Final2x-core-${{ matrix.os-version }}.zip
+
+
+  Release:
+    needs: [ setup, build ]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v3
+        with:
+          path: asset
+
+      - name: dist
+        run: |
+          mkdir dist
+          cp asset/artifact/* dist
+          cd dist && ls
+
+      - name: Create Release and Upload Release Asset
+        uses: softprops/action-gh-release@v1
+        with:
+          name: Release ${{ needs.setup.outputs.DATE }}
+          tag_name: ${{ needs.setup.outputs.DATE }}
+          body: Auto Release.
+          draft: false
+          prerelease: false
+          files: dist/*
+
