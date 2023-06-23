@@ -73,7 +73,7 @@ jobs:
 
       - name: Test
         run: |
-          cd test
+          cd tests
           python CIsetconfig.py
 
       - name: Test-windows
