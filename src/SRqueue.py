@@ -33,4 +33,4 @@ def SR_queue():
             img = sr.process(img)
             cv2.imencode('.png', img)[1].tofile(save_path)
         else:
-            logger.error("File not found: " + img_path + ", skip. Save path: " + save_path)
+            logger.warning("File not found: " + img_path + ", skip. Save path: " + save_path)
