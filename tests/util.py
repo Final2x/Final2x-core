@@ -9,7 +9,11 @@ from src.utils.getConfig import SRCONFIG
 
 def load_image() -> np.ndarray:
     projectPATH = Path(__file__).resolve().parent.parent.absolute()
-    test_img: str = str(projectPATH / "assets" / "herta.jpg")
+    if CONFIG()[0] == -1:
+        test_img: str = str(projectPATH / "assets" / "cpu-test.jpg")
+    else:
+        test_img: str = str(projectPATH / "assets" / "herta.jpg")
+
     img = cv2.imdecode(np.fromfile(test_img, dtype=np.uint8), cv2.IMREAD_COLOR)
     return img
 
