@@ -36,6 +36,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
           architecture: x64
 
+      - name: vulkan dll
+        if: matrix.os-version == 'windows-latest'
+        run: echo F | xcopy .\assets\vulkan-1.dll C:\Windows\System32
+
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
