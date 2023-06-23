@@ -10,6 +10,8 @@ if __name__ == '__main__':
     if not cv2.ocl.haveOpenCL():
         gpuid = -1
 
+    print(f"gpuid: {gpuid}")
+
     p_dict = {
         "gpuid"      : gpuid,
         "inputpath"  : [
@@ -36,5 +38,8 @@ if __name__ == '__main__':
     p_model: str = str(projectPATH / "models")
     p_yaml = str(projectPATH / "config.yaml")
 
+    print(f"p_model: {p_model}")
+    print(f"p_yaml: {p_yaml}")
+
     with open(p_yaml, 'w', encoding='utf-8') as f:
-        yaml.dump(p_dict, f)
+        yaml.safe_dump(p_dict, f)
