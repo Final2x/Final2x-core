@@ -39,7 +39,7 @@ jobs:
       - name: Install dependencies
         run: |
           pip install -r requirements.txt
-          cd test
+          cd tests
           pip install -r test_requirements.txt
 
       - name: Test
