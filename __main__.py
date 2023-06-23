@@ -7,6 +7,7 @@ from src.SRqueue import SR_queue
 from src.utils.getConfig import SRCONFIG
 
 # python -m pytest --cov=src --cov-report=html
+# python -m PyInstaller -n Final2x-core -i assets/favicon.ico __main__.py
 if getattr(sys, 'frozen', False):
     # frozen
     projectPATH = Path(sys.executable).parent.absolute()
@@ -30,3 +31,5 @@ else:
     config.getConfigfromJson(str(args.JSON), str(projectPATH / "models"))
 
 SR_queue()
+
+logger.success("SR_Finish")

@@ -8,12 +8,9 @@ from src.utils.getConfig import SRCONFIG
 
 
 def load_image() -> np.ndarray:
-    try:
-        img = cv2.imdecode(np.fromfile("./test/imgs/herta.jpg", dtype=np.uint8),
-                           cv2.IMREAD_COLOR)
-    except Exception:
-        img = cv2.imdecode(np.fromfile("./imgs/herta.jpg", dtype=np.uint8),
-                           cv2.IMREAD_COLOR)
+    projectPATH = Path(__file__).resolve().parent.parent.absolute()
+    test_img: str = str(projectPATH / "assets" / "herta.jpg")
+    img = cv2.imdecode(np.fromfile(test_img, dtype=np.uint8), cv2.IMREAD_COLOR)
     return img
 
 
@@ -25,8 +22,8 @@ def CONFIG() -> tuple[int, str, str, str]:
         "gpuid"      : gpuid,
         "inputpath"  : [
             "./1/1/4/5/1/4/1/9/1/9/8/1/0.jpg",
-            str(projectPATH / "test" / "imgs" / "herta.jpg"),
-            str(projectPATH / "test" / "imgs" / "herta.jpg"),
+            str(projectPATH / "assets" / "herta.jpg"),
+            str(projectPATH / "assets" / "herta.jpg"),
             str(projectPATH / "assets" / "final2x-10.png"),
             str(projectPATH / "assets" / "final2x-20.png"),
             str(projectPATH / "assets" / "final2x-40.png"),
