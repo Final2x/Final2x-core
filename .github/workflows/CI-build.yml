@@ -71,7 +71,7 @@ jobs:
           name: Final2x-core-${{ matrix.os-version }}
           path: dist/Final2x-core/Final2x-core-${{ matrix.os-version }}.zip
 
-      - name: Test
+      - name: Generate Test Config
         run: |
           cd tests
           python CIsetconfig.py

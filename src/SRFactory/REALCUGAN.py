@@ -30,18 +30,16 @@ class REALCUGAN(SRBaseClass):
                     self._modelnoise = -1
             else:
                 logger.warning("RealCUGAN-se modelscale should be in [2, 3, 4]. Auto set to 2")
+                self._reset_modelscale(2)
                 logger.warning("RealCUGAN-se modelnoise should be in [-1, 0, 1, 2, 3]. Auto set to -1")
-                self._modelscale = 2
                 self._modelnoise = -1
-                self._set_sr_n()
 
         elif self._model == "RealCUGAN-pro":
             model_i = "models-pro"
 
             if self._modelscale not in [2, 3]:
                 logger.warning("RealCUGAN-pro modelscale should be in [2, 3]. Auto set to 2")
-                self._modelscale = 2
-                self._set_sr_n()
+                self._reset_modelscale(2)
 
             if self._modelnoise not in [-1, 0, 3]:
                 logger.warning("RealCUGAN-pro modelnoise should be in [-1, 0, 3]. Auto set to -1")

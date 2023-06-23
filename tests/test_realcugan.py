@@ -1,6 +1,6 @@
 import pytest
 
-from tests.util import load_image, getSRCONFIG, calculate_image_similarity
+from tests.util import load_image, getSRCONFIG, calculate_image_similarity, compare_image_size
 
 
 class Test_REALCUGAN:
@@ -17,6 +17,7 @@ class Test_REALCUGAN:
                 img1 = load_image()
                 img2 = SR.process(img1)
                 assert calculate_image_similarity(img1, img2)
+                assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_RealCUGAN_se(self):
         from src.SRFactory import REALCUGAN
@@ -30,6 +31,7 @@ class Test_REALCUGAN:
                 img1 = load_image()
                 img2 = SR.process(img1)
                 assert calculate_image_similarity(img1, img2)
+                assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_invalid_model(self):
         from src.SRFactory import REALCUGAN

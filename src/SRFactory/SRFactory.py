@@ -24,6 +24,13 @@ class SRFactory:
             from src.SRFactory import WAIFU2X
             return WAIFU2X()
 
+        elif model in ["SRMD"]:
+            if config.gpuid == -1:
+                logger.error("GPU is required for SRMD")
+                raise Exception("GPU is required for SRMD")
+            from src.SRFactory import SRMD
+            return SRMD()
+
         else:
             logger.error("model not implemented")
             raise NotImplementedError("model not implemented")

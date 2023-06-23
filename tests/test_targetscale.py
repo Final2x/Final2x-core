@@ -1,6 +1,6 @@
 import math
 
-from tests.util import load_image, getSRCONFIG, calculate_image_similarity
+from tests.util import load_image, getSRCONFIG, calculate_image_similarity, compare_image_size
 
 
 class Test_TARGETSCALE:
@@ -12,11 +12,9 @@ class Test_TARGETSCALE:
             config.targetscale = t
             SR = REALCUGAN()
             img1 = load_image()
-            target_size = (math.ceil(img1.shape[1] * t),
-                           math.ceil(img1.shape[0] * t))
             img2 = SR.process(img1)
             assert calculate_image_similarity(img1, img2)
-            assert img2.shape[0] == target_size[0] and img2.shape[1] == target_size[1]
+            assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_targetscale_negative(self):
         from src.SRFactory import REALCUGAN
