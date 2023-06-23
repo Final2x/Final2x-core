@@ -1,7 +1,7 @@
 import sys
 import pytest
 
-from test.util import load_image, CONFIG, getSRCONFIG, calculate_image_similarity
+from tests.util import load_image, CONFIG, getSRCONFIG, calculate_image_similarity
 
 
 @pytest.mark.skipif(sys.platform == "darwin", reason="Skipping test when running on macOS")
