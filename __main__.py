@@ -39,4 +39,4 @@ if not cv2.ocl.haveOpenCL() and config.gpuid != -1:
 
 SR_queue()
 
-logger.success("SR_Finish")
+logger.success("______SR_COMPLETED______")

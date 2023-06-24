@@ -1,4 +1,4 @@
-gpuid: 0
+gpuid: -1
 inputpath:
 - ./1/1/4/5/1/4/1/9/1/9/8/1/0.jpg
 - /Users/tohru/Downloads/Final2x-core/assets/herta.jpg
@@ -9,8 +9,8 @@ inputpath:
 - /Users/tohru/Downloads/Final2x-core/assets/final2x-80.png
 - /Users/tohru/Downloads/Final2x-core/assets/final2x-160.png
 - /Users/tohru/Downloads/Final2x-core/assets/final2x-320.png
-- /Users/tohru/Downloads/Final2x-core/assets/final2x-640.png
-- /Users/tohru/Downloads/Final2x-core/assets/final2x-1280.png
+- /Users/tohru/Downloads/Final2x-core/assets/herta-unix-pic.exe
+- /Users/tohru/Downloads/Final2x-core/assets/vulkan-1.dll
 model: RealCUGAN-pro
 modelnoise: 1
 modelscale: 2
