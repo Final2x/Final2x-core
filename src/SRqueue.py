@@ -21,11 +21,13 @@ def SR_queue():
 
         i: int = 0
         while Path(save_path).is_file():
+            logger.warning("Image already exists: " + save_path)
             i += 1
             save_path = str(output_path /
                             (Path(
                                 str(config.targetscale) + 'x-' + Path(img_path).name).stem + '(' + str(i) + ').png'
                              ))
+            logger.warning("Try to save to: " + save_path)
 
         if Path(img_path).is_file():
             try:
@@ -35,17 +37,17 @@ def SR_queue():
                 if img is None:
                     raise Exception('Failed to decode image.')
             except Exception as e:
-                logger.warning(str(e))
+                logger.error(str(e))
                 logger.warning("CV2 load image failed: " + img_path + ", skip. ")
-                logger.warning("Process Complete: " + img_path)
+                logger.warning("Skip Image: " + img_path)
                 continue
 
             logger.info("Processing: " + img_path + ", save to: " + save_path)
             img = sr.process(img)
             cv2.imencode('.png', img)[1].tofile(save_path)
 
-            logger.success("Process Complete: " + img_path)
+            logger.success("Process Completed: " + img_path)
 
         else:
-            logger.warning("File not found: " + img_path + ", skip. Save path: " + save_path)
-            logger.warning("Process Complete: " + img_path)
+            logger.error("File not found: " + img_path + ", skip. Save path: " + save_path)
+            logger.warning("Skip Image: " + img_path)
