@@ -8,7 +8,7 @@
 
 [![codecov](https://codecov.io/gh/Tohrusky/Final2x-core/branch/main/graph/badge.svg?token=B2TNKYN4O4)](https://codecov.io/gh/Tohrusky/Final2x-core) [![CI-test](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-test.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-test.yml) [![CI-build](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-build.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-build.yml)
 
-Core for [Final2x](https://github.com/Tohrusky/Final2x). And can use as a CLI tool.
+Core for [Final2x](https://github.com/Tohrusky/Final2x). And can use as a CLI tool for Image Super-Resolution.
 
 # Use
 
