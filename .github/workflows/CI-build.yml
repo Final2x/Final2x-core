@@ -42,9 +42,6 @@ jobs:
 
       - name: Build
         run: |
-          cd tests
-          pip install -r test_requirements.txt
-          cd ..
           pip install -r requirements.txt
           pip install pyinstaller
           python -m PyInstaller -n Final2x-core -i assets/favicon.ico __main__.py
