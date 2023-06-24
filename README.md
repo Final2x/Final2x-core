@@ -47,7 +47,7 @@ Pass the config json string to the program through the `-j` parameter.
   ],
   "model": "RealCUGAN-pro", // model name
   "modelscale": 2, // model upscale factor
-  "modelnoise": -1, // model noise level
+  "modelnoise": -1, // DENOISE level
   "outputpath": "path/to/output", // output path
   "targetscale": 2.0, 
   // Target upscale factor, upscale multiple times to achieve the target upscale factor.
