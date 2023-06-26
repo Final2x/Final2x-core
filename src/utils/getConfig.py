@@ -1,3 +1,4 @@
+from pathlib import Path
 import yaml
 import json
 from typing import Union
@@ -90,6 +91,10 @@ class SRCONFIG:
         if type(value) is not str:
             logger.error("outputpath must be str")
             raise TypeError("outputpath must be str")
+        if not Path(value).is_dir():
+            logger.error("outputpath must be a dir")
+            raise TypeError("outputpath must be a dir")
+
         self._outputpath = value
 
     @targetscale.setter
@@ -141,4 +146,7 @@ class SRCONFIG:
         if type(value) is not list:
             logger.error("inputpath must be list")
             raise TypeError("inputpath must be list")
+        if len(value) == 0:
+            logger.error("inputpath must not be empty")
+            raise ValueError("inputpath must not be empty")
         self._inputpath = value

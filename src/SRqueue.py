@@ -13,7 +13,17 @@ def SR_queue():
     output_path: Path = Path(config.outputpath) / "outputs"
     output_path.mkdir(parents=True, exist_ok=True)  # create output folder
     sr = SRFactory.getSR()
+
+    cnt: int = 0
+    # percentage: float = 0.0
+    total: int = len(input_path)
+    logger.info("Total: " + str(total))
+
     for img_path in input_path:
+        percentage: float = round(cnt / total * 100, 1)
+        logger.info("Processing------[ " + str(percentage) + "% ]")
+        cnt += 1
+
         save_path = str(output_path /
                         (Path(
                             str(config.targetscale) + 'x-' + Path(img_path).name).stem + '.png'
@@ -29,7 +39,10 @@ def SR_queue():
                              ))
             logger.warning("Try to save to: " + save_path)
 
-        if Path(img_path).is_file():
+        if not Path(img_path).is_file():
+            logger.error("File not found: " + img_path + ", skip. Save path: " + save_path)
+            logger.warning("______Skip_Image______: " + img_path)
+        else:
             try:
                 # The file may not be read correctly.
                 # In unix-like system, the Filename Extension is not important.
@@ -39,15 +52,14 @@ def SR_queue():
             except Exception as e:
                 logger.error(str(e))
                 logger.warning("CV2 load image failed: " + img_path + ", skip. ")
-                logger.warning("Skip Image: " + img_path)
+                logger.warning("______Skip_Image______: " + img_path)
                 continue
 
             logger.info("Processing: " + img_path + ", save to: " + save_path)
             img = sr.process(img)
             cv2.imencode('.png', img)[1].tofile(save_path)
 
-            logger.success("Process Completed: " + img_path)
+            logger.success("______Process_Completed______: " + img_path)
 
-        else:
-            logger.error("File not found: " + img_path + ", skip. Save path: " + save_path)
-            logger.warning("Skip Image: " + img_path)
+    logger.info("Processing------[ " + str(100) + "% ]")
+
