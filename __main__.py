@@ -1,4 +1,5 @@
 import argparse
+import os
 import sys
 from pathlib import Path
 import cv2
@@ -40,3 +41,22 @@ if not cv2.ocl.haveOpenCL() and config.gpuid != -1:
 SR_queue()
 
 logger.success("______SR_COMPLETED______")
+
+
+def open_folder(path: str) -> None:
+    try:
+        if sys.platform.startswith('win'):
+            os.startfile(path)
+        elif sys.platform.startswith('darwin'):
+            os.system('open "{}"'.format(path))
+        elif sys.platform.startswith('linux'):
+            os.system('xdg-open "{}"'.format(path))
+        else:
+            logger.error("cannot open output folder")
+    except Exception as e:
+        logger.error(e)
+        logger.error("cannot open output folder")
+
+
+OP = Path(config.outputpath) / "outputs"
+open_folder(str(OP))

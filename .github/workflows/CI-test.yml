@@ -46,6 +46,11 @@ jobs:
           cd tests
           pip install -r test_requirements.txt
 
+      - name: Generate Test Config
+        run: |
+          cd tests
+          python CIsetconfig.py
+
       - name: Test
         run: |
           python -m pytest
