@@ -30,6 +30,9 @@ class Test_SRCONFIG:
         with pytest.raises(TypeError):
             config.outputpath = '/114514-1919810-114514'
         with pytest.raises(TypeError):
+            config.targetscale = 0
+            config.targetscale = -1
+            config.targetscale = -114.514
             config.targetscale = 2
             config.targetscale = "1"
         with pytest.raises(TypeError):
