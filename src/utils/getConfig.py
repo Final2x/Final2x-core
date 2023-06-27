@@ -42,13 +42,14 @@ class SRCONFIG:
     @logger.catch(reraise=True)
     def _setConfig(self, config: dict) -> None:
         self.outputpath = config["outputpath"]
-        self.targetscale = config["targetscale"]
         self.gpuid = config["gpuid"]
         self.tta = config["tta"]
         self.model = config["model"]
         self.modelscale = config["modelscale"]
         self.modelnoise = config["modelnoise"]
         self.inputpath = config["inputpath"]
+        # targetscale should be set after modelscale
+        self.targetscale = config["targetscale"]
 
     @property
     def modelpath(self) -> str:
@@ -104,7 +105,10 @@ class SRCONFIG:
             raise TypeError("targetscale must be int or float")
         if type(value) is not float:
             value = float(value)
-        self._targetscale = value
+        if value <= 0:
+            self._targetscale = self._modelscale
+        else:
+            self._targetscale = value
 
     @gpuid.setter
     def gpuid(self, value: int) -> None:
