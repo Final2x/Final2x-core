@@ -5,6 +5,7 @@ from loguru import logger
 
 from src.SRFactory import SRFactory
 from src.utils.getConfig import SRCONFIG
+from src.utils.progressLog import PrintProgressLog
 
 
 def SR_queue():
@@ -14,15 +15,9 @@ def SR_queue():
     output_path.mkdir(parents=True, exist_ok=True)  # create output folder
     sr = SRFactory.getSR()
 
-    cnt: int = 0
-    # percentage: float = 0.0
-    total: int = len(input_path)
-    logger.info("Total: " + str(total))
+    logger.info("Processing------[ 0.0% ]")
 
     for img_path in input_path:
-        percentage: float = round(cnt / total * 100, 1)
-        logger.info("Processing------[ " + str(percentage) + "% ]")
-        cnt += 1
 
         save_path = str(output_path /
                         (Path(
@@ -42,6 +37,8 @@ def SR_queue():
         if not Path(img_path).is_file():
             logger.error("File not found: " + img_path + ", skip. Save path: " + save_path)
             logger.warning("______Skip_Image______: " + img_path)
+            PrintProgressLog().skipProgress()
+
         else:
             try:
                 # The file may not be read correctly.
@@ -53,6 +50,7 @@ def SR_queue():
                 logger.error(str(e))
                 logger.warning("CV2 load image failed: " + img_path + ", skip. ")
                 logger.warning("______Skip_Image______: " + img_path)
+                PrintProgressLog().skipProgress()
                 continue
 
             logger.info("Processing: " + img_path + ", save to: " + save_path)
@@ -60,6 +58,3 @@ def SR_queue():
             cv2.imencode('.png', img)[1].tofile(save_path)
 
             logger.success("______Process_Completed______: " + img_path)
-
-    logger.info("Processing------[ " + str(100) + "% ]")
-

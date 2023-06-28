@@ -1,13 +1,20 @@
 from src.utils.getConfig import SRCONFIG
 from src.utils.singleton import singleton
+from src.utils.progressLog import PrintProgressLog
 
 
 class Test_SINGLETON:
-    def test_config_class(self):
+    def test_srconfig(self):
         c1 = SRCONFIG()
         c2 = SRCONFIG()
         c3 = SRCONFIG()
         assert c1 == c2 == c3
+
+    def test_progresslog(self):
+        p1 = PrintProgressLog()
+        p2 = PrintProgressLog()
+        p3 = PrintProgressLog()
+        assert p1 == p2 == p3
 
     def test_singleton_instance(self):
         class MyClass:

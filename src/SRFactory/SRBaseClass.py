@@ -6,6 +6,7 @@ from typing import final
 from loguru import logger
 
 from src.utils.getConfig import SRCONFIG
+from src.utils.progressLog import PrintProgressLog
 
 
 class SRBaseClass(ABC):
@@ -34,13 +35,18 @@ class SRBaseClass(ABC):
         set super-resolution times, when targetscale > modelscale
         :return:
         """
+        config = SRCONFIG()
+
         if self._modelscale <= 1:  # 1x model, or wrong model scale, call _reset_modelscale to set it
+            PrintProgressLog().set(len(config.inputpath), 1)
             return
         s: int = self._modelscale
         while self._targetscale > s:
             self._sr_n += 1
             s *= self._modelscale
         logger.info("sr_n set to " + str(self._sr_n))
+
+        PrintProgressLog().set(len(config.inputpath), self._sr_n)
 
     @abstractmethod
     def _init_SR_class(self) -> None:
@@ -82,6 +88,7 @@ class SRBaseClass(ABC):
     def _process_n(self, img: np.ndarray) -> np.ndarray:
         for _ in range(self._sr_n):
             img = self._SR_class.process_cv2(img)
+            PrintProgressLog().printProgress()
         return img
 
     @final
