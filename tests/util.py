@@ -1,8 +1,9 @@
-import cv2
-import numpy as np
 import json
 import math
 from pathlib import Path
+
+import cv2
+import numpy as np
 from skimage.metrics import structural_similarity
 
 from src.utils.getConfig import SRCONFIG
@@ -23,6 +24,9 @@ def CONFIG() -> tuple[int, str, str, str]:
     projectPATH = Path(__file__).resolve().parent.parent.absolute()
 
     gpuid: int = 0  # -1 for CPU, > 0 for GPU
+
+    gpuid = -1  # please comment this line if NOT TEST IN github actions
+
     # use cpu if gpu is not available
     if not cv2.ocl.haveOpenCL():
         gpuid = -1
