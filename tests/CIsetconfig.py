@@ -1,6 +1,6 @@
-import cv2
-import yaml
 from pathlib import Path
+
+import yaml
 
 
 def GithubAction_CPU_setconfig():
