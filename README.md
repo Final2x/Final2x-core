@@ -24,13 +24,16 @@ Final2x-core is a cross-platform image super-resolution CLI tool for [Final2x](h
 # Use
 
 ```shell
-usage: Final2x-core [-h] [-j JSON]
+usage: Final2x-core [-h] [-j JSON] [-y YAML] [-o]
 
-when -j is not specified, the config.yaml file in the directory will be read automatically
+when para is not specified, the config.yaml file in the directory will be read
+automatically
 
 optional arguments:
   -h, --help            show this help message and exit
-  -j JSON, --JSON JSON  JSON str for config
+  -j JSON, --JSON JSON  JSON string for config
+  -y YAML, --YAML YAML  yaml config file path
+  -o, --OP              check install
 
 ```
 
@@ -60,7 +63,7 @@ Pass the config json string to the program through the `-j` parameter.
 ```
 
 **SUPPORTED MODEL LIST:**
-
+```
 - RealCUGAN-se:
     - model: "RealCUGAN-se"
     - scale: 2
@@ -110,6 +113,7 @@ Pass the config json string to the program through the `-j` parameter.
     - model: "SRMD"
     - scale: 2, 3, 4
     - noise: -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+```
 
 # Build
 
