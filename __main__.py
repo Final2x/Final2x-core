@@ -23,30 +23,17 @@ else:
     # unfrozen
     projectPATH = Path(__file__).resolve().parent.absolute()
 
-logger.add(projectPATH / "logs" / "log-{time}.log", encoding="utf-8", retention="60 days")
-
-logger.info("projectPATH: " + str(projectPATH))
-
+# parse args
 parser = argparse.ArgumentParser()
-parser.description = "when -j is not specified, the config.yaml file in the directory will be read automatically"
-parser.add_argument("-j", "--JSON", help="JSON str for config", type=str)
+parser.description = "when para is not specified, the config.yaml file in the directory will be read automatically"
+parser.add_argument("-j", "--JSON", help="JSON string for config", type=str)
+parser.add_argument("-y", "--YAML", help="yaml config file path", type=str)
+parser.add_argument("-o", "--OP", help="check install", action="store_true")
 args = parser.parse_args()
 
-config = SRCONFIG()
-if args.JSON is None:
-    config.getConfigfromYaml(str(projectPATH / "config.yaml"), str(projectPATH / "models"))
-else:
-    config.getConfigfromJson(str(args.JSON), str(projectPATH / "models"))
-
-logger.info("config loaded")
-# use cpu if gpu is not available
-if not cv2.ocl.haveOpenCL() and config.gpuid != -1:
-    logger.warning("gpu is not available, use cpu instead")
-    config.gpuid = -1
-
-SR_queue()
-
-logger.success("______SR_COMPLETED______")
+if args.OP:
+    print("114514")
+    exit(0)
 
 
 def open_folder(path: str) -> None:
@@ -64,5 +51,32 @@ def open_folder(path: str) -> None:
         logger.error("cannot open output folder")
 
 
-OP = Path(config.outputpath) / "outputs"
-open_folder(str(OP))
+def main():
+    logger.add(projectPATH / "logs" / "log-{time}.log", encoding="utf-8", retention="60 days")
+    logger.info("projectPATH: " + str(projectPATH))
+
+    # load config
+    config = SRCONFIG()
+    if args.JSON is not None:
+        config.getConfigfromJson(str(args.JSON), str(projectPATH / "models"))
+    elif args.YAML is not None:
+        config.getConfigfromYaml(str(args.YAML), str(projectPATH / "models"))
+    else:
+        config.getConfigfromYaml(str(projectPATH / "config.yaml"), str(projectPATH / "models"))
+
+    logger.info("config loaded")
+    # use cpu if gpu is not available
+    if not cv2.ocl.haveOpenCL() and config.gpuid != -1:
+        logger.warning("gpu is not available, use cpu instead")
+        config.gpuid = -1
+
+    SR_queue()
+
+    logger.success("______SR_COMPLETED______")
+
+    OP = Path(config.outputpath) / "outputs"
+    open_folder(str(OP))
+
+
+if __name__ == '__main__':
+    main()
