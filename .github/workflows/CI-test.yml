@@ -23,7 +23,7 @@ jobs:
     strategy:
       matrix:
         python-version: [ "3.9" ]
-        os-version: [ "windows-latest" ]
+        os-version: [ "windows-latest" , "ubuntu-20.04" , "macos-latest" ]
 
     runs-on: ${{ matrix.os-version }}
     steps:
