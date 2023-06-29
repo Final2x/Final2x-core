@@ -6,6 +6,7 @@ from tests.util import load_image, CONFIG, getSRCONFIG, calculate_image_similari
 
 @pytest.mark.skipif(sys.platform == "darwin", reason="Skipping test when running on macOS")
 class Test_WAIFU2X:
+    @pytest.mark.skipif(sys.platform == "linux" and CONFIG()[0] == -1, reason="Skipping test when running on Linux CPU")
     def test_case_Waifu2x_cunet(self):
         from src.SRFactory import WAIFU2X
         config = getSRCONFIG()
