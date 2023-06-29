@@ -1,0 +1,43 @@
+name: Release-pypi
+
+on:
+  workflow_dispatch:
+
+jobs:
+  Pypi:
+    strategy:
+      matrix:
+        python-version: ["3.9"]
+
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+
+      - uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          architecture: x64
+
+      - name: Check Python version
+        run: |
+          python --version
+
+      - name: Install dependencies and copy files to package
+        run: |
+          pip install -r requirements.txt
+          pip install twine wheel setuptools
+          cp -r src Final2x_core
+          cp -r __init__.py Final2x_core
+          cp -r __main__.py Final2x_core
+          cp -r config.yaml Final2x_core
+
+      - name: Build package
+        run: |
+          python setup.py sdist
+
+      - name: Publish a Python distribution to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API }}
