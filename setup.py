@@ -2,7 +2,7 @@ import os
 
 from setuptools import setup
 
-_version: str = "0.0.1"
+_version: str = "0.0.2"
 
 
 def My_find_packages(*tops):
