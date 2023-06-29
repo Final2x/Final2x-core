@@ -23,8 +23,13 @@
 
 Final2x-core is a cross-platform image super-resolution CLI tool for [Final2x](https://github.com/Tohrusky/Final2x). 
 
-# Use
+# Install
+Download in [Release](https://github.com/Tohrusky/Final2x-core/releases) or use pip (python >= 3.6, >=3.9 for MacOS arm64)
+```shell
+pip install Final2x-core
+```
 
+# Use
 ```shell
 usage: Final2x-core [-h] [-j JSON] [-y YAML] [-o]
 
@@ -40,12 +45,11 @@ optional arguments:
 ```
 
 # Config
-
 Pass the config json string to the program through the `-j` parameter.
 
 **PLEASE NOTE: the config is JSON, remove the // comments before use.**
 
-```
+```json
 {
   "gpuid": 0, // GPU id, >= -1 (-1 for CPU, may not work for some models.)
   "inputpath": [
@@ -65,7 +69,7 @@ Pass the config json string to the program through the `-j` parameter.
 ```
 
 **SUPPORTED MODEL LIST:**
-```
+```yaml
 - RealCUGAN-se:
     - model: "RealCUGAN-se"
     - scale: 2
@@ -118,14 +122,12 @@ Pass the config json string to the program through the `-j` parameter.
 ```
 
 # Build
-
 [Github Action](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-build.yml)
 
 *The project just only been tested in Ubuntu 18+ and Debian 9+ environments on Linux, so if the project does not work on
 your system, please try building it.*
 
 # Reference
-
 The following references were used in the development of this project:
 
 [ncnn](https://github.com/Tencent/ncnn) - ncnn is a high-performance neural network inference framework developed by
