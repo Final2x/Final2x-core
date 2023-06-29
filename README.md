@@ -15,6 +15,8 @@
 [![CI-test](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-test.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-test.yml) 
 [![CI-build](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-build.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-build.yml)
 [![Release](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release.yml)
+[![PIP-test](https://github.com/Tohrusky/Final2x-core/actions/workflows/PIP-test.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/PIP-test.yml)
+[![Release-pypi](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release-pypi.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release-pypi.yml)
 [![PyPI version](https://badge.fury.io/py/Final2x-core.svg)](https://badge.fury.io/py/Final2x-core)
 ![GitHub](https://img.shields.io/github/license/Tohrusky/Final2x-core)
 
@@ -24,13 +26,16 @@ Final2x-core is a cross-platform image super-resolution CLI tool for [Final2x](h
 # Use
 
 ```shell
-usage: Final2x-core [-h] [-j JSON]
+usage: Final2x-core [-h] [-j JSON] [-y YAML] [-o]
 
-when -j is not specified, the config.yaml file in the directory will be read automatically
+when para is not specified, the config.yaml file in the directory will be read
+automatically
 
 optional arguments:
   -h, --help            show this help message and exit
-  -j JSON, --JSON JSON  JSON str for config
+  -j JSON, --JSON JSON  JSON string for config
+  -y YAML, --YAML YAML  yaml config file path
+  -o, --OP              check install
 
 ```
 
@@ -60,7 +65,7 @@ Pass the config json string to the program through the `-j` parameter.
 ```
 
 **SUPPORTED MODEL LIST:**
-
+```
 - RealCUGAN-se:
     - model: "RealCUGAN-se"
     - scale: 2
@@ -110,6 +115,7 @@ Pass the config json string to the program through the `-j` parameter.
     - model: "SRMD"
     - scale: 2, 3, 4
     - noise: -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+```
 
 # Build
 
