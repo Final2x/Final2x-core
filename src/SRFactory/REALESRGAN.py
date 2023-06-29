@@ -1,6 +1,10 @@
 from loguru import logger
 
-from src.SRFactory.SRBaseClass import SRBaseClass
+try:
+    from src.SRFactory.SRBaseClass import SRBaseClass
+except ImportError:
+    # for pip cli
+    from Final2x_core.src.SRFactory.SRBaseClass import SRBaseClass
 
 
 class REALESRGAN(SRBaseClass):
@@ -11,7 +15,12 @@ class REALESRGAN(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-        from src.SRncnn.REALESRGANncnn import REALESRGANncnn
+
+        try:
+            from src.SRncnn.REALESRGANncnn import REALESRGANncnn
+        except ImportError:
+            # for pip cli
+            from Final2x_core.src.SRncnn.REALESRGANncnn import Realesrgan as REALESRGANncnn
 
         # model_dict = {
         #     0: {"param": "realesr-animevideov3-x2.param", "bin": "realesr-animevideov3-x2.bin", "scale": 2},

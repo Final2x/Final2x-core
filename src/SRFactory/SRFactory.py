@@ -5,30 +5,60 @@ class SRFactory:
     @staticmethod
     @logger.catch(reraise=True)
     def getSR():
-        from src.utils.getConfig import SRCONFIG
+
+        try:
+            from src.utils.getConfig import SRCONFIG
+        except ImportError:
+            # for pip cli
+            from Final2x_core.src.utils.getConfig import SRCONFIG
+
         config = SRCONFIG()
         model = config.model
 
         if model in ["RealCUGAN-se", "RealCUGAN-pro"]:
-            from src.SRFactory import REALCUGAN
+
+            try:
+                from src.SRFactory import REALCUGAN
+            except ImportError:
+                # for pip cli
+                from Final2x_core.src.SRFactory import REALCUGAN
+
             return REALCUGAN()
 
         elif model in ["RealESRGAN-animevideov3", "RealESRGAN", "RealESRGAN-anime"]:
             if config.gpuid == -1:
                 logger.error("GPU is required for RealESRGAN")
                 raise Exception("GPU is required for RealESRGAN")
-            from src.SRFactory import REALESRGAN
+
+            try:
+                from src.SRFactory import REALESRGAN
+            except ImportError:
+                # for pip cli
+                from Final2x_core.src.SRFactory import REALESRGAN
+
             return REALESRGAN()
 
         elif model in ["Waifu2x-cunet", "Waifu2x-upconv_7_anime_style_art_rgb", "Waifu2x-upconv_7_photo"]:
-            from src.SRFactory import WAIFU2X
+
+            try:
+                from src.SRFactory import WAIFU2X
+            except ImportError:
+                # for pip cli
+                from Final2x_core.src.SRFactory import WAIFU2X
+
             return WAIFU2X()
 
         elif model in ["SRMD"]:
             if config.gpuid == -1:
                 logger.error("GPU is required for SRMD")
                 raise Exception("GPU is required for SRMD")
-            from src.SRFactory import SRMD
+
+            try:
+                from src.SRFactory import SRMD
+            except ImportError:
+                # for pip cli
+                from Final2x_core.src.SRFactory import SRMD
+
             return SRMD()
 
         else:

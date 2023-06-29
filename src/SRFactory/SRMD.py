@@ -1,6 +1,10 @@
 from loguru import logger
 
-from src.SRFactory.SRBaseClass import SRBaseClass
+try:
+    from src.SRFactory.SRBaseClass import SRBaseClass
+except ImportError:
+    # for pip cli
+    from Final2x_core.src.SRFactory.SRBaseClass import SRBaseClass
 
 
 class SRMD(SRBaseClass):
@@ -11,7 +15,12 @@ class SRMD(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-        from src.SRncnn.SRMDncnn import SRMDncnn
+
+        try:
+            from src.SRncnn.SRMDncnn import SRMDncnn
+        except ImportError:
+            # for pip cli
+            from Final2x_core.src.SRncnn.SRMDncnn import SRMD as SRMDncnn
 
         if self._modelnoise not in range(-1, 11):
             logger.warning("SRMD modelnoise must be in [-1, 10]. Auto set to 3")
