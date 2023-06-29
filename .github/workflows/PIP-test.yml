@@ -43,7 +43,7 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install Final2x-core yaml pathlib
+          pip install Final2x-core pathlib
 
       - name: Test pip
         run: |
