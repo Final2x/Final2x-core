@@ -1,7 +1,12 @@
 import pathlib
+
 from realesrgan_ncnn_py import Realesrgan
 
-from src.utils.getConfig import SRCONFIG
+try:
+    from src.utils.getConfig import SRCONFIG
+except ImportError:
+    # for pip cli
+    from Final2x_core.src.utils.getConfig import SRCONFIG
 
 
 class REALESRGANncnn(Realesrgan):

@@ -1,6 +1,10 @@
 from loguru import logger
 
-from src.SRFactory.SRBaseClass import SRBaseClass
+try:
+    from src.SRFactory.SRBaseClass import SRBaseClass
+except ImportError:
+    # for pip cli
+    from Final2x_core.src.SRFactory.SRBaseClass import SRBaseClass
 
 
 class REALCUGAN(SRBaseClass):
@@ -11,7 +15,12 @@ class REALCUGAN(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-        from src.SRncnn.REALCUGANncnn import REALCUGANncnn
+
+        try:
+            from src.SRncnn.REALCUGANncnn import REALCUGANncnn
+        except ImportError:
+            # for pip cli
+            from Final2x_core.src.SRncnn.REALCUGANncnn import Realcugan as REALCUGANncnn
 
         if self._model == "RealCUGAN-se":
             model_i = "models-se"

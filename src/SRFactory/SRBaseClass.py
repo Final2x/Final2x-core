@@ -1,12 +1,18 @@
-from abc import ABC, abstractmethod
-import numpy as np
-import cv2
 import math
+from abc import ABC, abstractmethod
 from typing import final
+
+import cv2
+import numpy as np
 from loguru import logger
 
-from src.utils.getConfig import SRCONFIG
-from src.utils.progressLog import PrintProgressLog
+try:
+    from src.utils.getConfig import SRCONFIG
+    from src.utils.progressLog import PrintProgressLog
+except ImportError:
+    # for pip cli
+    from Final2x_core.src.utils.getConfig import SRCONFIG
+    from Final2x_core.src.utils.progressLog import PrintProgressLog
 
 
 class SRBaseClass(ABC):

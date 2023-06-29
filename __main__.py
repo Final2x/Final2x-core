@@ -2,11 +2,17 @@ import argparse
 import os
 import sys
 from pathlib import Path
+
 import cv2
 from loguru import logger
 
-from src.SRqueue import SR_queue
-from src.utils.getConfig import SRCONFIG
+try:
+    from src.SRqueue import SR_queue
+    from src.utils.getConfig import SRCONFIG
+except ImportError:
+    # for pip cli
+    from Final2x_core.src.SRqueue import SR_queue
+    from Final2x_core.src.utils.getConfig import SRCONFIG
 
 # python -m pytest --cov=src --cov-report=html
 # python -m PyInstaller -n Final2x-core -i assets/favicon.ico __main__.py

@@ -1,5 +1,10 @@
 from loguru import logger
-from src.utils.singleton import singleton
+
+try:
+    from src.utils.singleton import singleton
+except ImportError:
+    # for pip cli
+    from Final2x_core.src.utils.singleton import singleton
 
 
 @singleton

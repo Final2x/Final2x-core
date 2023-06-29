@@ -1,6 +1,10 @@
 from loguru import logger
 
-from src.SRFactory.SRBaseClass import SRBaseClass
+try:
+    from src.SRFactory.SRBaseClass import SRBaseClass
+except ImportError:
+    # for pip cli
+    from Final2x_core.src.SRFactory.SRBaseClass import SRBaseClass
 
 
 class WAIFU2X(SRBaseClass):
@@ -11,7 +15,12 @@ class WAIFU2X(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-        from src.SRncnn.WAIFU2Xncnn import WAIFU2Xncnn
+
+        try:
+            from src.SRncnn.WAIFU2Xncnn import WAIFU2Xncnn
+        except ImportError:
+            # for pip cli
+            from Final2x_core.src.SRncnn.WAIFU2Xncnn import Waifu2x as WAIFU2Xncnn
 
         # waifu2x model name, can be "models-cunet",
         # "models-upconv_7_anime_style_art_rgb" and

@@ -1,7 +1,12 @@
 import pathlib
+
 from srmd_ncnn_py import SRMD
 
-from src.utils.getConfig import SRCONFIG
+try:
+    from src.utils.getConfig import SRCONFIG
+except ImportError:
+    # for pip cli
+    from Final2x_core.src.utils.getConfig import SRCONFIG
 
 
 class SRMDncnn(SRMD):
