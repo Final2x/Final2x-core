@@ -130,32 +130,24 @@ your system, please try building it.*
 # Reference
 The following references were used in the development of this project:
 
-[ncnn](https://github.com/Tencent/ncnn) - ncnn is a high-performance neural network inference framework developed by
+- [ncnn](https://github.com/Tencent/ncnn) - ncnn is a high-performance neural network inference framework developed by
 Tencent AI Lab.
-
-[nihui/realcugan-ncnn-vulkan](https://github.com/nihui/realcugan-ncnn-vulkan) - This project provided the core
+- [nihui/realcugan-ncnn-vulkan](https://github.com/nihui/realcugan-ncnn-vulkan) - This project provided the core
 implementation of the Real-CUGAN algorithm using the ncnn and Vulkan libraries.
-
-[xinntao/Real-ESRGAN-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan) - This project provided the core
+- [xinntao/Real-ESRGAN-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan) - This project provided the core
 implementation of the Real-ESRGAN algorithm using the ncnn and Vulkan
 libraries.
-
-[nihui/waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) - This project provided the core
+- [nihui/waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) - This project provided the core
 implementation of the Waifu2x algorithm using the ncnn and Vulkan libraries.
-
-[nihui/srmd-ncnn-vulkan](https://github.com/nihui/srmd-ncnn-vulkan) - This project provided the core implementation of
+- [nihui/srmd-ncnn-vulkan](https://github.com/nihui/srmd-ncnn-vulkan) - This project provided the core implementation of
 the SRMD algorithm using the ncnn and Vulkan libraries.
-
-[realcugan-ncnn-py](https://github.com/Tohrusky/realcugan-ncnn-py) - This project provided the Python Binding for
+- [realcugan-ncnn-py](https://github.com/Tohrusky/realcugan-ncnn-py) - This project provided the Python Binding for
 realcugan-ncnn-vulkan with PyBind11
-
-[realesrgan-ncnn-py](https://github.com/Tohrusky/realesrgan-ncnn-py) - This project provided the Python Binding for
+- [realesrgan-ncnn-py](https://github.com/Tohrusky/realesrgan-ncnn-py) - This project provided the Python Binding for
 realesrgan-ncnn-vulkan with PyBind11
-
-[waifu2x-ncnn-py](https://github.com/Tohrusky/waifu2x-ncnn-py) - This project provided the Python Binding for
+- [waifu2x-ncnn-py](https://github.com/Tohrusky/waifu2x-ncnn-py) - This project provided the Python Binding for
 waifu2x-ncnn-vulkan with PyBind11
-
-[srmd-ncnn-py](https://github.com/Tohrusky/srmd-ncnn-py) - This project provided the Python Binding for srmd-ncnn-vulkan
+- [srmd-ncnn-py](https://github.com/Tohrusky/srmd-ncnn-py) - This project provided the Python Binding for srmd-ncnn-vulkan
 with PyBind11
 
 # License
