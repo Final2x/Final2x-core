@@ -26,6 +26,7 @@ else:
 # parse args
 parser = argparse.ArgumentParser()
 parser.description = "when para is not specified, the config.yaml file in the directory will be read automatically"
+parser.add_argument("-b", "--BASE64", help="base64 string for config json", type=str)
 parser.add_argument("-j", "--JSON", help="JSON string for config", type=str)
 parser.add_argument("-y", "--YAML", help="yaml config file path", type=str)
 parser.add_argument("-o", "--OP", help="check install", action="store_true")
@@ -57,7 +58,9 @@ def main():
 
     # load config
     config = SRCONFIG()
-    if args.JSON is not None:
+    if args.BASE64 is not None:
+        config.getConfigfromBase64toJson(str(args.BASE64), str(projectPATH / "models"))
+    elif args.JSON is not None:
         config.getConfigfromJson(str(args.JSON), str(projectPATH / "models"))
     elif args.YAML is not None:
         config.getConfigfromYaml(str(args.YAML), str(projectPATH / "models"))
@@ -65,10 +68,12 @@ def main():
         config.getConfigfromYaml(str(projectPATH / "config.yaml"), str(projectPATH / "models"))
 
     logger.info("config loaded")
+
+    # 还是不加比较好
     # use cpu if gpu is not available
-    if not cv2.ocl.haveOpenCL() and config.gpuid != -1:
-        logger.warning("gpu is not available, use cpu instead")
-        config.gpuid = -1
+    # if not cv2.ocl.haveOpenCL() and config.gpuid != -1:
+    #     logger.warning("gpu is not available, use cpu instead")
+    #     config.gpuid = -1
 
     SR_queue()
 
