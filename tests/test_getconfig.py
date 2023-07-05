@@ -1,3 +1,4 @@
+import base64
 import pytest
 
 from src.utils.getConfig import SRCONFIG
@@ -8,6 +9,12 @@ class Test_SRCONFIG:
     def test_case_getConfigfromJson(self):
         config = SRCONFIG()
         config.getConfigfromJson(CONFIG()[1], CONFIG()[3])
+
+    def test_case_getConfigfromBase64toJson(self):
+        config = SRCONFIG()
+        b = base64.b64encode(CONFIG()[1].encode('utf-8'))
+        b = b.decode("utf-8")
+        config.getConfigfromBase64toJson(b, CONFIG()[3])
 
     def test_case_getConfigfromJson_Error(self):
         config = SRCONFIG()
