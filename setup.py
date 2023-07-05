@@ -2,7 +2,7 @@ import os
 
 from setuptools import setup
 
-_version: str = "0.0.2"
+_version: str = "1.0.0"
 
 
 def My_find_packages(*tops):
@@ -46,8 +46,8 @@ setup(
                       'opencv-python',
                       'PyYAML',
                       'loguru',
-                      'realcugan_ncnn_py',
-                      'realesrgan_ncnn_py',
-                      'waifu2x_ncnn_py',
-                      'srmd_ncnn_py']
+                      'realcugan_ncnn_py >= 1.3.0',
+                      'realesrgan_ncnn_py >= 1.3.0',
+                      'waifu2x_ncnn_py >= 1.3.0',
+                      'srmd_ncnn_py >= 1.3.0']
 )

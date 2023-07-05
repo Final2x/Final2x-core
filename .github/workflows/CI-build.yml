@@ -49,6 +49,7 @@ jobs:
       - name: cp-windows
         if: matrix.os-version == 'windows-latest'
         run: |
+          xcopy assets\vulkan-1.dll dist\Final2x-core
           xcopy config.yaml dist\Final2x-core
           xcopy models dist\Final2x-core\models /E /I /H /Y
           cd dist\Final2x-core
