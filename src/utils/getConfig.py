@@ -1,4 +1,5 @@
 import json
+import base64
 from pathlib import Path
 from typing import Union
 
@@ -40,7 +41,22 @@ class SRCONFIG:
         :param modelpath: path to model folder
         :return:
         """
-        self._modelpath: str = modelpath
+        self._modelpath = modelpath
+        config = json.loads(config)
+        self._setConfig(config)
+
+    @logger.catch(reraise=True)
+    def getConfigfromBase64toJson(self, config: str = "", modelpath: str = "") -> None:
+        """
+        get config from base64 string
+        :param config: a base64 string
+        :param modelpath: path to model folder
+        :return:
+        """
+        self._modelpath = modelpath
+
+        config = config.encode('utf-8')
+        config = base64.b64decode(config).decode("utf-8")
         config = json.loads(config)
         self._setConfig(config)
 
