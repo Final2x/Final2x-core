@@ -20,7 +20,7 @@
 [![PyPI version](https://badge.fury.io/py/Final2x-core.svg)](https://badge.fury.io/py/Final2x-core)
 ![GitHub](https://img.shields.io/github/license/Tohrusky/Final2x-core)
 
-Final2x-core is a cross-platform image super-resolution CLI tool for [Final2x](https://github.com/Tohrusky/Final2x).
+Final2x-core is a cross-platform image super-resolution CLI tool for [Final2x](https://github.com/Tohrusky/Final2x). If you have any questions, please raise an issue [in this repository](https://github.com/Tohrusky/Final2x).
 
 # Install
 
