@@ -44,6 +44,7 @@ optional arguments:
                         base64 string for config json
   -j JSON, --JSON JSON  JSON string for config
   -y YAML, --YAML YAML  yaml config file path
+  -l, --LOG             save log
   -o, --OP              check install
 ```
 
