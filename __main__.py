@@ -2,8 +2,6 @@ import argparse
 import os
 import sys
 from pathlib import Path
-
-import cv2
 from loguru import logger
 
 try:
@@ -29,6 +27,7 @@ parser.description = "when para is not specified, the config.yaml file in the di
 parser.add_argument("-b", "--BASE64", help="base64 string for config json", type=str)
 parser.add_argument("-j", "--JSON", help="JSON string for config", type=str)
 parser.add_argument("-y", "--YAML", help="yaml config file path", type=str)
+parser.add_argument("-l", "--LOG", help="save log", action="store_true")
 parser.add_argument("-o", "--OP", help="check install", action="store_true")
 args = parser.parse_args()
 
@@ -53,7 +52,9 @@ def open_folder(path: str) -> None:
 
 
 def main():
-    logger.add(projectPATH / "logs" / "log-{time}.log", encoding="utf-8", retention="60 days")
+    if args.LOG:
+        # init logger
+        logger.add(projectPATH / "logs" / "log-{time}.log", encoding="utf-8", retention="60 days")
     logger.info("projectPATH: " + str(projectPATH))
 
     # load config
