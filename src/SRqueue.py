@@ -47,10 +47,20 @@ def SR_queue():
             PrintProgressLog().skipProgress()
 
         else:
+            alpha_channel = None
+
             try:
                 # The file may not be read correctly.
                 # In unix-like system, the Filename Extension is not important.
-                img = cv2.imdecode(np.fromfile(img_path, dtype=np.uint8), cv2.IMREAD_COLOR)
+                img = cv2.imdecode(np.fromfile(img_path, dtype=np.uint8), cv2.IMREAD_UNCHANGED)
+                if img.shape[2] == 4:
+                    logger.warning("4 channels image detected.")
+                    PrintProgressLog().Total += PrintProgressLog().sr_n
+                    # Extract alpha channel
+                    alpha_channel = img[:, :, 3]
+                    # Remove alpha channel from the image
+                    img = img[:, :, :3]
+
                 if img is None:
                     raise Exception('Failed to decode image.')
             except Exception as e:
@@ -62,6 +72,15 @@ def SR_queue():
 
             logger.info("Processing: " + img_path + ", save to: " + save_path)
             img = sr.process(img)
+
+            if alpha_channel is not None:
+                # Stack alpha channel into a 3-channel tensor (AAA)
+                alpha_tensor = np.dstack((alpha_channel, alpha_channel, alpha_channel))
+                # Apply super-resolution to the alpha tensor
+                alpha_tensor = sr.process(alpha_tensor)
+                # Merge processed RGB channels with processed alpha tensor
+                img = np.dstack((img, alpha_tensor[:, :, 0]))
+
             cv2.imencode('.png', img)[1].tofile(save_path)
 
             logger.success("______Process_Completed______: " + img_path)
