@@ -1,4 +1,4 @@
-name: PIP-test
+name: pip-test
 
 # Controls when the workflow will run
 on:
