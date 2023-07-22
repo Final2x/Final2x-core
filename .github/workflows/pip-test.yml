@@ -19,7 +19,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  PIP-test:
+  pip-test:
     strategy:
       matrix:
         python-version: [ "3.9" ]
