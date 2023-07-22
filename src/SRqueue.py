@@ -16,6 +16,10 @@ except ImportError:
 
 
 def SR_queue():
+    """
+    Super-resolution queue. Process all RGBA images according to the config.
+    :return:
+    """
     config = SRCONFIG()
     input_path: list = config.inputpath
     output_path: Path = Path(config.outputpath) / "outputs"

@@ -5,7 +5,10 @@ class SRFactory:
     @staticmethod
     @logger.catch(reraise=True)
     def getSR():
-
+        """
+        get a SR model instance according to config
+        :return:
+        """
         try:
             from src.utils.getConfig import SRCONFIG
         except ImportError:
