@@ -16,7 +16,7 @@
 [![CI-test](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-test.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-test.yml)
 [![CI-build](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-build.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-build.yml)
 [![Release](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release.yml)
-[![PIP-test](https://github.com/Tohrusky/Final2x-core/actions/workflows/PIP-test.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/PIP-test.yml)
+[![pip-test](https://github.com/Tohrusky/Final2x-core/actions/workflows/pip-test.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/pip-test.yml)
 [![Release-pypi](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release-pypi.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release-pypi.yml)
 [![PyPI version](https://badge.fury.io/py/Final2x-core.svg)](https://badge.fury.io/py/Final2x-core)
 ![GitHub](https://img.shields.io/github/license/Tohrusky/Final2x-core)
