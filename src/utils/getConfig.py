@@ -28,6 +28,12 @@ class SRCONFIG:
 
     @logger.catch(reraise=True)
     def getConfigfromYaml(self, configpath: str = "", modelpath: str = "") -> None:
+        """
+        get config from yaml file
+        :param configpath: absolute path to config file
+        :param modelpath: absolute path to model folder
+        :return:
+        """
         self._modelpath: str = modelpath
         with open(configpath, 'r', encoding="utf-8") as f:
             config = yaml.safe_load(f)
@@ -38,7 +44,7 @@ class SRCONFIG:
         """
         get config from json string
         :param config: a json string
-        :param modelpath: path to model folder
+        :param modelpath: absolute path to model folder
         :return:
         """
         self._modelpath = modelpath
@@ -50,7 +56,7 @@ class SRCONFIG:
         """
         get config from base64 string
         :param config: a base64 string
-        :param modelpath: path to model folder
+        :param modelpath: absolute path to model folder
         :return:
         """
         self._modelpath = modelpath
