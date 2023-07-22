@@ -16,7 +16,7 @@
 [![CI-test](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-test.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-test.yml)
 [![CI-build](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-build.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-build.yml)
 [![Release](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release.yml)
-[![PIP-test](https://github.com/Tohrusky/Final2x-core/actions/workflows/PIP-test.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/PIP-test.yml)
+[![pip-test](https://github.com/Tohrusky/Final2x-core/actions/workflows/pip-test.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/pip-test.yml)
 [![Release-pypi](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release-pypi.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release-pypi.yml)
 [![PyPI version](https://badge.fury.io/py/Final2x-core.svg)](https://badge.fury.io/py/Final2x-core)
 ![GitHub](https://img.shields.io/github/license/Tohrusky/Final2x-core)
@@ -25,7 +25,7 @@ Final2x-core is a cross-platform image super-resolution CLI tool for [Final2x](h
 
 # Install
 
-Download in [Release](https://github.com/Tohrusky/Final2x-core/releases) or use pip (python >= 3.6, >=3.9 for MacOS
+Download in [Release](https://github.com/Tohrusky/Final2x-core/releases) or use pip (python >= 3.8, >=3.9 for MacOS
 arm64)
 
 ```shell

@@ -2,7 +2,7 @@ import os
 
 from setuptools import setup
 
-_version: str = "1.0.4"
+_version: str = "1.0.5"
 
 
 def My_find_packages(*tops):
@@ -27,8 +27,6 @@ setup(
         'Intended Audience :: Developers',
         'License :: OSI Approved :: BSD License',
         # 目标 Python 版本
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
@@ -41,7 +39,7 @@ setup(
         ]
     },
     include_package_data=True,
-    python_requires='>=3.6',
+    python_requires='>=3.8',
     install_requires=['numpy',
                       'opencv-python',
                       'PyYAML',
