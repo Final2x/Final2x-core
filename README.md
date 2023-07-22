@@ -25,7 +25,7 @@ Final2x-core is a cross-platform image super-resolution CLI tool for [Final2x](h
 
 # Install
 
-Download in [Release](https://github.com/Tohrusky/Final2x-core/releases) or use pip (python >= 3.6, >=3.9 for MacOS
+Download in [Release](https://github.com/Tohrusky/Final2x-core/releases) or use pip (python >= 3.8, >=3.9 for MacOS
 arm64)
 
 ```shell
