@@ -6,7 +6,6 @@
   </picture>
 </a>
 
-
 ![MacOS x64](https://img.shields.io/badge/Support-MacOS%20x64-blue?logo=Apple&style=flat-square)
 ![MacOS arm64](https://img.shields.io/badge/Support-MacOS%20arm64-blue?logo=Apple&style=flat-square)
 ![Windows x64](https://img.shields.io/badge/Support-Windows%20x64-blue?logo=Windows&style=flat-square)
@@ -96,17 +95,14 @@ Pass the config json string to the program through the `-j` parameter.
     - noise: -1, 0, 3
 
 - RealESRGAN-animevideov3:
-    - gpuid: >= 0
     - model: "RealESRGAN-animevideov3"
     - scale: 2, 3, 4
 
 - RealESRGAN:
-    - gpuid: >= 0
     - model: "RealESRGAN"
     - scale: 4
 
 - RealESRGAN-anime:
-    - gpuid: >= 0
     - model: "RealESRGAN-anime"
     - scale: 4
 
@@ -126,20 +122,14 @@ Pass the config json string to the program through the `-j` parameter.
     - model: "Waifu2x-upconv_7_photo"
     - scale: 2
     - noise: -1, 0, 1, 2, 3
-
-- SRMD:
-    - gpuid: >= 0
-    - model: "SRMD"
-    - scale: 2, 3, 4
-    - noise: -1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
 ```
 
 # Build
 
 [Github Action](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-build.yml)
 
-*The project just only been tested in Ubuntu 18+ and Debian 9+ environments on Linux, so if the project does not work on
-your system, please try building it.*
+_The project just only been tested in Ubuntu 18+ and Debian 9+ environments on Linux, so if the project does not work on
+your system, please try building it._
 
 # Reference
 
@@ -149,11 +139,9 @@ The following references were used in the development of this project:
 - [nihui/realcugan-ncnn-vulkan](https://github.com/nihui/realcugan-ncnn-vulkan) - This project provided the core implementation of the Real-CUGAN algorithm using the ncnn and Vulkan libraries.
 - [xinntao/Real-ESRGAN-ncnn-vulkan](https://github.com/xinntao/Real-ESRGAN-ncnn-vulkan) - This project provided the core implementation of the Real-ESRGAN algorithm using the ncnn and Vulkan libraries.
 - [nihui/waifu2x-ncnn-vulkan](https://github.com/nihui/waifu2x-ncnn-vulkan) - This project provided the core implementation of the Waifu2x algorithm using the ncnn and Vulkan libraries.
-- [nihui/srmd-ncnn-vulkan](https://github.com/nihui/srmd-ncnn-vulkan) - This project provided the core implementation of the SRMD algorithm using the ncnn and Vulkan libraries.
 - [realcugan-ncnn-py](https://github.com/Tohrusky/realcugan-ncnn-py) - This project provided the Python Binding for realcugan-ncnn-vulkan with PyBind11.
 - [realesrgan-ncnn-py](https://github.com/Tohrusky/realesrgan-ncnn-py) - This project provided the Python Binding for realesrgan-ncnn-vulkan with PyBind11.
 - [waifu2x-ncnn-py](https://github.com/Tohrusky/waifu2x-ncnn-py) - This project provided the Python Binding for waifu2x-ncnn-vulkan with PyBind11.
-- [srmd-ncnn-py](https://github.com/Tohrusky/srmd-ncnn-py) - This project provided the Python Binding for srmd-ncnn-vulkan with PyBind11.
 
 # License
 
