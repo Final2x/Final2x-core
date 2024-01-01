@@ -10,8 +10,10 @@ class WAIFU2X(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-        from Final2x_core.src.SRncnn.WAIFU2Xncnn import WAIFU2Xncnn
-
+        if self._isfrozen:
+            from Final2x_core.src.SRncnn.WAIFU2Xncnn import WAIFU2Xncnn
+        else:
+            from waifu2x_ncnn_py import Waifu2x as WAIFU2Xncnn  # type: ignore
         # waifu2x model name, can be "models-cunet",
         # "models-upconv_7_anime_style_art_rgb" and
         # "models-upconv_7_photo", default: models-cunet

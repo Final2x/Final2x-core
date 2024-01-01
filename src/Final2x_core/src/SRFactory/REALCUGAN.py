@@ -10,7 +10,10 @@ class REALCUGAN(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-        from Final2x_core.src.SRncnn.REALCUGANncnn import REALCUGANncnn
+        if self._isfrozen:
+            from Final2x_core.src.SRncnn.REALCUGANncnn import REALCUGANncnn
+        else:
+            from realcugan_ncnn_py import Realcugan as REALCUGANncnn  # type: ignore
 
         if self._model == "RealCUGAN-se":
             model_i = "models-se"

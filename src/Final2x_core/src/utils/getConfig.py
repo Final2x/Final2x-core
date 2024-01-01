@@ -20,6 +20,7 @@ class SRCONFIG:
         self._modelscale: int = 2
         self._modelnoise: int = 0
         self._inputpath: List[str] = []
+        self.isfrozen: bool = False
 
     @logger.catch(reraise=True)
     def getConfigfromYaml(self, configpath: str = "", modelpath: str = "") -> None:

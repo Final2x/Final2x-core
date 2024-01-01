@@ -12,6 +12,9 @@ from loguru import logger
 class SRBaseClass(ABC):
     def __init__(self) -> None:
         config = SRCONFIG()
+
+        self._isfrozen: bool = config.isfrozen  # freeze model
+
         self._targetscale: float = config.targetscale  # user upscale factor
         self._gpuid: int = config.gpuid  # gpu id, -1 for cpu
         self._tta: bool = config.tta  # use tta

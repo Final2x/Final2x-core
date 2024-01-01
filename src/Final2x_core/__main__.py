@@ -8,8 +8,11 @@ from loguru import logger
 from Final2x_core.src.SRqueue import SR_queue
 from Final2x_core.src.utils.getConfig import SRCONFIG
 
+_IS_FROZEN_ = False
+
 if getattr(sys, "frozen", False):
     # frozen
+    _IS_FROZEN_ = True
     projectPATH = Path(sys.executable).parent.absolute()
 else:
     # unfrozen
@@ -61,6 +64,8 @@ def main() -> None:
         config.getConfigfromYaml(str(args.YAML), str(projectPATH / "models"))
     else:
         config.getConfigfromYaml(str(projectPATH / "config.yaml"), str(projectPATH / "models"))
+
+    config.isfrozen = _IS_FROZEN_
 
     logger.info("config loaded")
     logger.debug(config.outputpath)
