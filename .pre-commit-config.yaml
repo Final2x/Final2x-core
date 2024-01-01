@@ -41,6 +41,8 @@ repos:
         args: [src, tests]
         pass_filenames: false
         additional_dependencies:
+          - loguru
+          - types-PyYAML
           - types-requests
           - types-certifi
           - pytest
