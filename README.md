@@ -11,14 +11,14 @@
 ![Windows x64](https://img.shields.io/badge/Support-Windows%20x64-blue?logo=Windows&style=flat-square)
 ![Windows arm64](https://img.shields.io/badge/Support-Windows%20arm64-blue?logo=Windows&style=flat-square)
 ![Linux x64](https://img.shields.io/badge/Support-Linux%20x64-blue?logo=Linux&style=flat-square)
-[![codecov](https://codecov.io/gh/Tohrusky/Final2x-core/branch/main/graph/badge.svg?token=B2TNKYN4O4)](https://codecov.io/gh/Tohrusky/Final2x-core)
-[![CI-test](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-test.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-test.yml)
-[![CI-build](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-build.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/CI-build.yml)
-[![Release](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release.yml)
-[![pip-test](https://github.com/Tohrusky/Final2x-core/actions/workflows/pip-test.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/pip-test.yml)
-[![Release-pypi](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release-pypi.yml/badge.svg)](https://github.com/Tohrusky/Final2x-core/actions/workflows/Release-pypi.yml)
+[![codecov](https://codecov.io/gh/Final2x/Final2x-core/branch/main/graph/badge.svg?token=B2TNKYN4O4)](https://codecov.io/gh/Final2x/Final2x-core)
+[![CI-test](https://github.com/Final2x/Final2x-core/actions/workflows/CI-test.yml/badge.svg)](https://github.com/Final2x/Final2x-core/actions/workflows/CI-test.yml)
+[![CI-build](https://github.com/Final2x/Final2x-core/actions/workflows/CI-build.yml/badge.svg)](https://github.com/Final2x/Final2x-core/actions/workflows/CI-build.yml)
+[![Release](https://github.com/Final2x/Final2x-core/actions/workflows/Release.yml/badge.svg)](https://github.com/Final2x/Final2x-core/actions/workflows/Release.yml)
+[![pip-test](https://github.com/Final2x/Final2x-core/actions/workflows/pip-test.yml/badge.svg)](https://github.com/Final2x/Final2x-core/actions/workflows/pip-test.yml)
+[![Release-pypi](https://github.com/Final2x/Final2x-core/actions/workflows/Release-pypi.yml/badge.svg)](https://github.com/Final2x/Final2x-core/actions/workflows/Release-pypi.yml)
 [![PyPI version](https://badge.fury.io/py/Final2x-core.svg)](https://badge.fury.io/py/Final2x-core)
-![GitHub](https://img.shields.io/github/license/Tohrusky/Final2x-core)
+![GitHub](https://img.shields.io/github/license/Final2x/Final2x-core)
 
 Final2x-core is a cross-platform image super-resolution CLI tool for [Final2x](https://github.com/Tohrusky/Final2x). If you have any questions, please raise an issue [in this repository](https://github.com/Tohrusky/Final2x).
 
