@@ -73,8 +73,10 @@ class SRBaseClass(ABC):
             img = self._process_n(img)
 
         else:  # upscale multiple times
-            self._target_size = (math.ceil(img.shape[1] * self._targetscale),
-                                 math.ceil(img.shape[0] * self._targetscale))
+            self._target_size = (
+                math.ceil(img.shape[1] * self._targetscale),
+                math.ceil(img.shape[0] * self._targetscale),
+            )
             img = self._process_n(img)
             img = self._process_downscale(img)
 
@@ -83,7 +85,7 @@ class SRBaseClass(ABC):
     @final
     @logger.catch
     def _process_downscale(self, img: np.ndarray) -> np.ndarray:
-        if abs(self._targetscale - float(self._modelscale ** self._sr_n)) < 1e-3:
+        if abs(self._targetscale - float(self._modelscale**self._sr_n)) < 1e-3:
             return img
         # use bicubic interpolation for image downscaling
         img = cv2.resize(img, self._target_size, interpolation=cv2.INTER_CUBIC)

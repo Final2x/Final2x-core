@@ -1,8 +1,9 @@
 import base64
+
 import pytest
 
 from src.utils.getConfig import SRCONFIG
-from tests.util import load_image, CONFIG, calculate_image_similarity
+from tests.util import CONFIG
 
 
 class Test_SRCONFIG:
@@ -12,7 +13,7 @@ class Test_SRCONFIG:
 
     def test_case_getConfigfromBase64toJson(self):
         config = SRCONFIG()
-        b = base64.b64encode(CONFIG()[1].encode('utf-8'))
+        b = base64.b64encode(CONFIG()[1].encode("utf-8"))
         b = b.decode("utf-8")
         config.getConfigfromBase64toJson(b, CONFIG()[3])
 
@@ -35,7 +36,7 @@ class Test_SRCONFIG:
         with pytest.raises(TypeError):
             config.outputpath = 1
         with pytest.raises(TypeError):
-            config.outputpath = '/114514-1919810-114514'
+            config.outputpath = "/114514-1919810-114514"
         with pytest.raises(TypeError):
             config.targetscale = 0
             config.targetscale = -1

@@ -1,7 +1,5 @@
-import pytest
-
 from src.SRqueue import SR_queue
-from tests.util import load_image, getSRCONFIG, calculate_image_similarity
+from tests.util import getSRCONFIG
 
 
 class Test_SRQUEUE:

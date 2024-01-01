@@ -15,7 +15,6 @@ class REALCUGAN(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-
         try:
             from src.SRncnn.REALCUGANncnn import REALCUGANncnn
         except ImportError:
@@ -58,6 +57,11 @@ class REALCUGAN(SRBaseClass):
             logger.error("RealCUGAN model not implemented")
             raise NotImplementedError("RealCUGAN model not implemented")
 
-        self._SR_class = REALCUGANncnn(gpuid=self._gpuid, model=model_i, noise=self._modelnoise,
-                                       scale=self._modelscale, tta_mode=self._tta, )
+        self._SR_class = REALCUGANncnn(
+            gpuid=self._gpuid,
+            model=model_i,
+            noise=self._modelnoise,
+            scale=self._modelscale,
+            tta_mode=self._tta,
+        )
         logger.info("RealCUGAN model initialized")

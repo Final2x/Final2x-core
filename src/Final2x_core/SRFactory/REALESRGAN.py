@@ -15,7 +15,6 @@ class REALESRGAN(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-
         try:
             from src.SRncnn.REALESRGANncnn import REALESRGANncnn
         except ImportError:

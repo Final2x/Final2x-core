@@ -1,7 +1,8 @@
 import sys
+
 import pytest
 
-from tests.util import load_image, CONFIG, getSRCONFIG, calculate_image_similarity, compare_image_size
+from tests.util import CONFIG, calculate_image_similarity, compare_image_size, getSRCONFIG, load_image
 
 
 @pytest.mark.skipif(sys.platform == "darwin", reason="Skipping test when running on macOS")
@@ -9,6 +10,7 @@ class Test_SRMD:
     @pytest.mark.skipif(CONFIG()[0] == -1, reason="Skipping test due to use CPU")
     def test_case_SRMD(self):
         from src.SRFactory import SRMD
+
         config = getSRCONFIG()
         config.model = "SRMD"
         for s in range(1, 6):
@@ -23,6 +25,7 @@ class Test_SRMD:
 
     def test_case_invalid_model(self):
         from src.SRFactory import SRMD
+
         config = getSRCONFIG()
         config.model = "sb"
         with pytest.raises(NotImplementedError):

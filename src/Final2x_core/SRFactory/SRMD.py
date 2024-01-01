@@ -15,7 +15,6 @@ class SRMD(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-
         try:
             from src.SRncnn.SRMDncnn import SRMDncnn
         except ImportError:
@@ -38,6 +37,7 @@ class SRMD(SRBaseClass):
             logger.error("SRMD model not implemented")
             raise NotImplementedError("SRMD model not implemented")
 
-        self._SR_class = SRMDncnn(gpuid=self._gpuid, model=model_i, noise=self._modelnoise,
-                                  scale=self._modelscale, tta_mode=self._tta)
+        self._SR_class = SRMDncnn(
+            gpuid=self._gpuid, model=model_i, noise=self._modelnoise, scale=self._modelscale, tta_mode=self._tta
+        )
         logger.info("SRMD model initialized")

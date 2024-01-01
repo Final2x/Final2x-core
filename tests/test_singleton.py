@@ -1,6 +1,6 @@
 from src.utils.getConfig import SRCONFIG
-from src.utils.singleton import singleton
 from src.utils.progressLog import PrintProgressLog
+from src.utils.singleton import singleton
 
 
 class Test_SINGLETON:

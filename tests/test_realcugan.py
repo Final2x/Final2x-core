@@ -1,11 +1,12 @@
 import pytest
 
-from tests.util import load_image, getSRCONFIG, calculate_image_similarity, compare_image_size
+from tests.util import calculate_image_similarity, compare_image_size, getSRCONFIG, load_image
 
 
 class Test_REALCUGAN:
     def test_case_RealCUGAN_pro(self):
         from src.SRFactory import REALCUGAN
+
         config = getSRCONFIG()
         config.model = "RealCUGAN-pro"
         # test invalid scale and noise
@@ -21,6 +22,7 @@ class Test_REALCUGAN:
 
     def test_case_RealCUGAN_se(self):
         from src.SRFactory import REALCUGAN
+
         config = getSRCONFIG()
         config.model = "RealCUGAN-se"
         for s in range(1, 6):
@@ -35,6 +37,7 @@ class Test_REALCUGAN:
 
     def test_case_invalid_model(self):
         from src.SRFactory import REALCUGAN
+
         config = getSRCONFIG()
         config.model = "sb"
         with pytest.raises(NotImplementedError):

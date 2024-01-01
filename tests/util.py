@@ -32,8 +32,8 @@ def CONFIG() -> tuple[int, str, str, str]:
         gpuid = -1
 
     p_dict = {
-        "gpuid"      : gpuid,
-        "inputpath"  : [
+        "gpuid": gpuid,
+        "inputpath": [
             "./1/1/4/5/1/4/1/9/1/9/8/1/0.jpg",
             str(projectPATH / "assets" / "herta.jpg"),
             str(projectPATH / "assets" / "herta.jpg"),
@@ -46,12 +46,12 @@ def CONFIG() -> tuple[int, str, str, str]:
             str(projectPATH / "assets" / "herta-unix-pic.exe"),
             str(projectPATH / "assets" / "vulkan-1.dll"),
         ],
-        "model"      : "RealCUGAN-pro",
-        "modelscale" : 2,
-        "modelnoise" : 1,
-        "outputpath" : str(projectPATH / "assets"),
+        "model": "RealCUGAN-pro",
+        "modelscale": 2,
+        "modelnoise": 1,
+        "outputpath": str(projectPATH / "assets"),
         "targetscale": 2,
-        "tta"        : False,
+        "tta": False,
     }
 
     p_json: str = json.dumps(p_dict)
@@ -97,7 +97,6 @@ def compare_image_size(image1: np.ndarray, image2: np.ndarray, t: float) -> bool
     :param t: targetscale
     :return:
     """
-    target_size = (math.ceil(image1.shape[1] * t),
-                   math.ceil(image1.shape[0] * t))
+    target_size = (math.ceil(image1.shape[1] * t), math.ceil(image1.shape[0] * t))
 
     return image2.shape[0] == target_size[0] and image2.shape[1] == target_size[1]

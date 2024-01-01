@@ -2,6 +2,7 @@ import argparse
 import os
 import sys
 from pathlib import Path
+
 from loguru import logger
 
 try:
@@ -14,7 +15,7 @@ except ImportError:
 
 # python -m pytest --cov=src --cov-report=html
 # python -m PyInstaller -n Final2x-core -i assets/favicon.ico __main__.py
-if getattr(sys, 'frozen', False):
+if getattr(sys, "frozen", False):
     # frozen
     projectPATH = Path(sys.executable).parent.absolute()
 else:
@@ -38,11 +39,11 @@ if args.OP:
 
 def open_folder(path: str) -> None:
     try:
-        if sys.platform.startswith('win'):
+        if sys.platform.startswith("win"):
             os.startfile(path)
-        elif sys.platform.startswith('darwin'):
+        elif sys.platform.startswith("darwin"):
             os.system('open "{}"'.format(path))
-        elif sys.platform.startswith('linux'):
+        elif sys.platform.startswith("linux"):
             os.system('xdg-open "{}"'.format(path))
         else:
             logger.error("cannot open output folder")
@@ -84,5 +85,5 @@ def main():
     open_folder(str(OP))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

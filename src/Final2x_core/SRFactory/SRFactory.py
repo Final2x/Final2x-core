@@ -19,7 +19,6 @@ class SRFactory:
         model = config.model
 
         if model in ["RealCUGAN-se", "RealCUGAN-pro"]:
-
             try:
                 from src.SRFactory import REALCUGAN
             except ImportError:
@@ -42,7 +41,6 @@ class SRFactory:
             return REALESRGAN()
 
         elif model in ["Waifu2x-cunet", "Waifu2x-upconv_7_anime_style_art_rgb", "Waifu2x-upconv_7_photo"]:
-
             try:
                 from src.SRFactory import WAIFU2X
             except ImportError:

@@ -1,5 +1,5 @@
-import json
 import base64
+import json
 from pathlib import Path
 from typing import Union
 
@@ -35,7 +35,7 @@ class SRCONFIG:
         :return:
         """
         self._modelpath: str = modelpath
-        with open(configpath, 'r', encoding="utf-8") as f:
+        with open(configpath, "r", encoding="utf-8") as f:
             config = yaml.safe_load(f)
         self._setConfig(config)
 
@@ -61,7 +61,7 @@ class SRCONFIG:
         """
         self._modelpath = modelpath
 
-        config = config.encode('utf-8')
+        config = config.encode("utf-8")
         config = base64.b64decode(config).decode("utf-8")
         config = json.loads(config)
         self._setConfig(config)

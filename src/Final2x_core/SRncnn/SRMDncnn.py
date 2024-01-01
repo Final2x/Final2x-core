@@ -10,9 +10,7 @@ except ImportError:
 
 
 class SRMDncnn(SRMD):
-    def _load(
-            self, param_path: pathlib.Path = None, model_path: pathlib.Path = None
-    ) -> None:
+    def _load(self, param_path: pathlib.Path = None, model_path: pathlib.Path = None) -> None:
         """
         Load models from root models folder.
 

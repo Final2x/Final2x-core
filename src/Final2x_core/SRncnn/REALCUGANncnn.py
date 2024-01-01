@@ -23,30 +23,13 @@ class REALCUGANncnn(Realcugan):
             model_path = pathlib.Path(config.modelpath) / "RealCUGAN" / self._model
 
             if self._noise == -1:
-                param_path = (
-                        model_path
-                        / f"up{self._scale}x-conservative.param"
-                )
-                model_path = (
-                        model_path
-                        / f"up{self._scale}x-conservative.bin"
-                )
+                param_path = model_path / f"up{self._scale}x-conservative.param"
+                model_path = model_path / f"up{self._scale}x-conservative.bin"
             elif self._noise == 0:
-                param_path = (
-                        model_path
-                        / f"up{self._scale}x-no-denoise.param"
-                )
-                model_path = (
-                        model_path / f"up{self._scale}x-no-denoise.bin"
-                )
+                param_path = model_path / f"up{self._scale}x-no-denoise.param"
+                model_path = model_path / f"up{self._scale}x-no-denoise.bin"
             else:
-                param_path = (
-                        model_path
-                        / f"up{self._scale}x-denoise{self._noise}x.param"
-                )
-                model_path = (
-                        model_path
-                        / f"up{self._scale}x-denoise{self._noise}x.bin"
-                )
+                param_path = model_path / f"up{self._scale}x-denoise{self._noise}x.param"
+                model_path = model_path / f"up{self._scale}x-denoise{self._noise}x.bin"
 
         self._realcugan_object.load(str(param_path), str(model_path))

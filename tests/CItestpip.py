@@ -8,5 +8,5 @@ def GithubAction_PIP_Test():
     os.system("Final2x-core -y " + p_yaml)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     GithubAction_PIP_Test()
