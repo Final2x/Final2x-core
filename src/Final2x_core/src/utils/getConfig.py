@@ -1,7 +1,7 @@
 import base64
 import json
 from pathlib import Path
-from typing import Any, Dict, List, Union
+from typing import Dict, List, Optional, Union
 
 import yaml
 from Final2x_core.src.utils.singleton import singleton
@@ -61,7 +61,7 @@ class SRCONFIG:
         self._setConfig(config_dict)
 
     @logger.catch(reraise=True)
-    def _setConfig(self, config: Dict[str, Union[str, int, float, bool, List[str]]] | Any) -> None:
+    def _setConfig(self, config: Optional[Dict[str, Union[str, int, float, bool, List[str]]]]) -> None:
         self.outputpath = config["outputpath"]  # type: ignore
         self.gpuid = config["gpuid"]  # type: ignore
         self.tta = config["tta"]  # type: ignore
