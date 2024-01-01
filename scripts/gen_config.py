@@ -26,7 +26,6 @@ def gen_config() -> None:
         "inputpath": [
             "./1/1/4/5/1/4/1/9/1/9/8/1/0.jpg",
             str(projectPATH / "assets" / "herta.jpg"),
-            str(projectPATH / "assets" / "herta.jpg"),
             str(projectPATH / "assets" / "final2x-10.png"),
             str(projectPATH / "assets" / "final2x-20.png"),
             str(projectPATH / "assets" / "final2x-40.png"),

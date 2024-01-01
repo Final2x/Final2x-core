@@ -45,7 +45,12 @@ def SR_queue() -> None:
                 # The file may not be read correctly.
                 # In unix-like system, the Filename Extension is not important.
                 img = cv2.imdecode(np.fromfile(img_path, dtype=np.uint8), cv2.IMREAD_UNCHANGED)
-                if img.shape[2] == 4:
+
+                if len(img.shape) == 2:
+                    logger.warning("Grayscale image detected, Convert to RGB image.")
+                    img = cv2.cvtColor(img, cv2.COLOR_GRAY2RGB)
+
+                elif img.shape[2] == 4:
                     logger.warning("4 channels image detected.")
                     PrintProgressLog().Total += PrintProgressLog().sr_n
                     # Extract alpha channel
