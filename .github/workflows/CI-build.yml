@@ -78,4 +78,5 @@ jobs:
       - name: Test-unix
         if: matrix.os-version != 'windows-latest'
         run: |
+          cd dist/Final2x-core
           ./Final2x-core
