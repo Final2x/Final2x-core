@@ -10,11 +10,16 @@ _GPUID_ = 0
 if os.environ.get("GITHUB_ACTIONS") == "true":
     _GPUID_ = -1
 
+print("-" * 50)
 
-def gen_config():
+
+def gen_config() -> None:
     gpuid = _GPUID_
 
-    print(f"gpuid: {gpuid}")
+    if gpuid == -1:
+        print("GitHub Actions detected. Using CPU.")
+    else:
+        print(f"Not in GitHub Actions. Using GPU {gpuid}.")
 
     p_dict = {
         "gpuid": gpuid,
@@ -39,14 +44,12 @@ def gen_config():
         "tta": False,
     }
 
-    p_model = str(projectPATH / "src/Final2x_core/models")
     p_yaml = str(projectPATH / "src/Final2x_core/config.yaml")
-
-    print(f"p_model: {p_model}")
-    print(f"p_yaml: {p_yaml}")
 
     with open(p_yaml, "w", encoding="utf-8") as f:
         yaml.safe_dump(p_dict, f)
+
+    print("Config generated at " + p_yaml)
 
 
 if __name__ == "__main__":

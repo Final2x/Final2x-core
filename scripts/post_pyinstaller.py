@@ -4,7 +4,7 @@ from pathlib import Path
 projectPATH = Path(__file__).resolve().parent.parent.absolute()
 
 
-def copy_models_and_config():
+def copy_models_and_config() -> None:
     shutil.copytree(projectPATH / "src/Final2x_core/models", projectPATH / "dist/Final2x-core/models")
     shutil.copy(projectPATH / "src/Final2x_core/config.yaml", projectPATH / "dist/Final2x-core/config.yaml")
 
