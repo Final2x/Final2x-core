@@ -1,18 +1,24 @@
+import os
 from pathlib import Path
 
 import yaml
 
+projectPATH = Path(__file__).resolve().parent.parent.absolute()
 
-def GithubAction_CPU_setconfig():
-    projectPATH = Path(__file__).resolve().parent.parent.absolute()
+_GPUID_ = 0
+# gpuid = -1 when in GitHub Actions
+if os.environ.get("GITHUB_ACTIONS") == "true":
+    _GPUID_ = -1
 
-    gpuid: int = -1  # -1 for CPU, > 0 for GPU
+
+def gen_config():
+    gpuid = _GPUID_
 
     print(f"gpuid: {gpuid}")
 
     p_dict = {
-        "gpuid"      : gpuid,
-        "inputpath"  : [
+        "gpuid": gpuid,
+        "inputpath": [
             "./1/1/4/5/1/4/1/9/1/9/8/1/0.jpg",
             str(projectPATH / "assets" / "herta.jpg"),
             str(projectPATH / "assets" / "herta.jpg"),
@@ -25,23 +31,23 @@ def GithubAction_CPU_setconfig():
             str(projectPATH / "assets" / "herta-unix-pic.exe"),
             str(projectPATH / "assets" / "vulkan-1.dll"),
         ],
-        "model"      : "RealCUGAN-pro",
-        "modelscale" : 2,
-        "modelnoise" : 1,
-        "outputpath" : str(projectPATH / "assets"),
+        "model": "RealCUGAN-pro",
+        "modelscale": 2,
+        "modelnoise": 1,
+        "outputpath": str(projectPATH / "assets"),
         "targetscale": 2,
-        "tta"        : True,
+        "tta": False,
     }
 
-    p_model: str = str(projectPATH / "models")
-    p_yaml = str(projectPATH / "config.yaml")
+    p_model = str(projectPATH / "src/Final2x_core/models")
+    p_yaml = str(projectPATH / "src/Final2x_core/config.yaml")
 
     print(f"p_model: {p_model}")
     print(f"p_yaml: {p_yaml}")
 
-    with open(p_yaml, 'w', encoding='utf-8') as f:
+    with open(p_yaml, "w", encoding="utf-8") as f:
         yaml.safe_dump(p_dict, f)
 
 
-if __name__ == '__main__':
-    GithubAction_CPU_setconfig()
+if __name__ == "__main__":
+    gen_config()

@@ -1,21 +1,22 @@
-import pytest
+from Final2x_core.src.SRqueue import SR_queue
 
-from src.SRqueue import SR_queue
-from tests.util import load_image, getSRCONFIG, calculate_image_similarity
+from tests.util import getSRCONFIG
 
 
 class Test_SRQUEUE:
-    def test_case_srqueue(self):
+    def test_case_srqueue(self) -> None:
         config = getSRCONFIG()
-        config.targetscale = 1.14514
+        config.targetscale = 1.14514  # type: ignore
         SR_queue()
 
-    def test_case_srqueue_negative(self):
+    def test_case_srqueue_negative(self) -> None:
         config = getSRCONFIG()
-        config._targetscale = -1.14514  # force negative
+        # force negative
+        config._targetscale = -1.14514
         SR_queue()
 
-    def test_case_srqueue_zero(self):
+    def test_case_srqueue_zero(self) -> None:
         config = getSRCONFIG()
-        config._targetscale = 0  # force zero
+        # force zero
+        config._targetscale = 0
         SR_queue()

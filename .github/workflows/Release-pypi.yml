@@ -3,11 +3,14 @@ name: Release-pypi
 on:
   workflow_dispatch:
 
+env:
+  GITHUB_ACTIONS: true
+
 jobs:
   Pypi:
     strategy:
       matrix:
-        python-version: ["3.9"]
+        python-version: ["3.10"]
 
     runs-on: ubuntu-20.04
     steps:
@@ -15,27 +18,25 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: actions/setup-python@v4
+      - uses: pdm-project/setup-pdm@v3
+        name: Setup PDM
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
+          version: 2.11.1
+          prerelease: false
+          enable-pep582: false
+          allow-python-prereleases: false
+          update-python: true
 
       - name: Check Python version
         run: |
           python --version
 
-      - name: Install dependencies and copy files to package
-        run: |
-          pip install -r requirements.txt
-          pip install twine wheel setuptools
-          cp -r src Final2x_core
-          cp -r __init__.py Final2x_core
-          cp -r __main__.py Final2x_core
-          cp -r config.yaml Final2x_core
-
       - name: Build package
         run: |
-          python setup.py sdist
+          pdm install
+          pdm build
 
       - name: Publish a Python distribution to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1

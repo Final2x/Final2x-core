@@ -1,39 +1,37 @@
 import json
 import math
+import os
 from pathlib import Path
 
 import cv2
 import numpy as np
+from Final2x_core.src.utils.getConfig import SRCONFIG
 from skimage.metrics import structural_similarity
 
-from src.utils.getConfig import SRCONFIG
+projectPATH = Path(__file__).resolve().parent.parent.absolute()
+
+_GPUID_ = 0
+# gpuid = -1 when in GitHub Actions
+if os.environ.get("GITHUB_ACTIONS") == "true":
+    _GPUID_ = -1
 
 
 def load_image() -> np.ndarray:
-    projectPATH = Path(__file__).resolve().parent.parent.absolute()
     if CONFIG()[0] == -1:
-        test_img: str = str(projectPATH / "assets" / "cpu-test.jpg")
+        test_img = str(projectPATH / "assets" / "cpu-test.jpg")
     else:
-        test_img: str = str(projectPATH / "assets" / "herta.jpg")
+        test_img = str(projectPATH / "assets" / "herta.jpg")
 
     img = cv2.imdecode(np.fromfile(test_img, dtype=np.uint8), cv2.IMREAD_COLOR)
     return img
 
 
 def CONFIG() -> tuple[int, str, str, str]:
-    projectPATH = Path(__file__).resolve().parent.parent.absolute()
-
-    gpuid: int = 0  # -1 for CPU, > 0 for GPU
-
-    gpuid = -1  # please comment this line if NOT TEST IN github actions
-
-    # use cpu if gpu is not available
-    if not cv2.ocl.haveOpenCL():
-        gpuid = -1
+    gpuid = _GPUID_
 
     p_dict = {
-        "gpuid"      : gpuid,
-        "inputpath"  : [
+        "gpuid": gpuid,
+        "inputpath": [
             "./1/1/4/5/1/4/1/9/1/9/8/1/0.jpg",
             str(projectPATH / "assets" / "herta.jpg"),
             str(projectPATH / "assets" / "herta.jpg"),
@@ -46,18 +44,18 @@ def CONFIG() -> tuple[int, str, str, str]:
             str(projectPATH / "assets" / "herta-unix-pic.exe"),
             str(projectPATH / "assets" / "vulkan-1.dll"),
         ],
-        "model"      : "RealCUGAN-pro",
-        "modelscale" : 2,
-        "modelnoise" : 1,
-        "outputpath" : str(projectPATH / "assets"),
+        "model": "RealCUGAN-pro",
+        "modelscale": 2,
+        "modelnoise": 1,
+        "outputpath": str(projectPATH / "assets"),
         "targetscale": 2,
-        "tta"        : False,
+        "tta": False,
     }
 
     p_json: str = json.dumps(p_dict)
 
-    p_model: str = str(projectPATH / "models")
-    p_yaml = str(projectPATH / "config.yaml")
+    p_model: str = str(projectPATH / "src/Final2x_core/models")
+    p_yaml = str(projectPATH / "src/Final2x_core/config.yaml")
 
     return gpuid, p_json, p_yaml, p_model
 
@@ -97,7 +95,6 @@ def compare_image_size(image1: np.ndarray, image2: np.ndarray, t: float) -> bool
     :param t: targetscale
     :return:
     """
-    target_size = (math.ceil(image1.shape[1] * t),
-                   math.ceil(image1.shape[0] * t))
+    target_size = (math.ceil(image1.shape[1] * t), math.ceil(image1.shape[0] * t))
 
     return image2.shape[0] == target_size[0] and image2.shape[1] == target_size[1]

@@ -3,8 +3,10 @@ name: Release
 on:
   workflow_dispatch:
 
-jobs:
+env:
+  GITHUB_ACTIONS: true
 
+jobs:
   setup:
     runs-on: ubuntu-latest
     outputs:
@@ -17,8 +19,8 @@ jobs:
   Build:
     strategy:
       matrix:
-        python-version: [ "3.9" ]
-        os-version: [ "macos-latest", "windows-latest", "ubuntu-20.04" ]
+        python-version: ["3.10"]
+        os-version: ["macos-latest", "windows-latest", "ubuntu-20.04"]
 
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -26,10 +28,16 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: actions/setup-python@v4
+      - uses: pdm-project/setup-pdm@v3
+        name: Setup PDM
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
+          version: 2.11.1
+          prerelease: false
+          enable-pep582: false
+          allow-python-prereleases: false
+          update-python: true
 
       - name: vulkan dll
         if: matrix.os-version == 'windows-latest'
@@ -37,24 +45,18 @@ jobs:
 
       - name: Build
         run: |
-          pip install -r requirements.txt
-          pip install pyinstaller
-          python -m PyInstaller -n Final2x-core -i assets/favicon.ico __main__.py
+          pdm install
+          pdm run pyinstaller
 
-      - name: cp-windows
+      - name: zip-windows
         if: matrix.os-version == 'windows-latest'
         run: |
-          xcopy assets\vulkan-1.dll dist\Final2x-core
-          xcopy config.yaml dist\Final2x-core
-          xcopy models dist\Final2x-core\models /E /I /H /Y
           cd dist\Final2x-core
           7z a -r Final2x-core-${{ matrix.os-version }}.zip *
 
-      - name: cp-unix
+      - name: zip-unix
         if: matrix.os-version != 'windows-latest'
         run: |
-          cp config.yaml dist/Final2x-core
-          cp -r models dist/Final2x-core
           cd dist/Final2x-core
           zip -9 -r Final2x-core-${{ matrix.os-version }}.zip ./*
 
@@ -63,9 +65,8 @@ jobs:
         with:
           path: dist/Final2x-core/Final2x-core-${{ matrix.os-version }}.zip
 
-
   Release:
-    needs: [ setup, build ]
+    needs: [setup, build]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/download-artifact@v3
@@ -87,4 +88,3 @@ jobs:
           draft: false
           prerelease: false
           files: dist/*
-

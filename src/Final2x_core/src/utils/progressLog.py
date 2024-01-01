@@ -1,15 +1,10 @@
+from Final2x_core.src.utils.singleton import singleton
 from loguru import logger
-
-try:
-    from src.utils.singleton import singleton
-except ImportError:
-    # for pip cli
-    from Final2x_core.src.utils.singleton import singleton
 
 
 @singleton
 class PrintProgressLog:
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Total: Total Process Time
         """

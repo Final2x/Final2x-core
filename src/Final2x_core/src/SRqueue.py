@@ -2,20 +2,13 @@ from pathlib import Path
 
 import cv2
 import numpy as np
+from Final2x_core.src.SRFactory import SRFactory
+from Final2x_core.src.utils.getConfig import SRCONFIG
+from Final2x_core.src.utils.progressLog import PrintProgressLog
 from loguru import logger
 
-try:
-    from src.SRFactory import SRFactory
-    from src.utils.getConfig import SRCONFIG
-    from src.utils.progressLog import PrintProgressLog
-except ImportError:
-    # for pip cli
-    from Final2x_core.src.SRFactory import SRFactory
-    from Final2x_core.src.utils.getConfig import SRCONFIG
-    from Final2x_core.src.utils.progressLog import PrintProgressLog
 
-
-def SR_queue():
+def SR_queue() -> None:
     """
     Super-resolution queue. Process all RGBA images according to the config.
     :return:
@@ -29,20 +22,15 @@ def SR_queue():
     logger.info("Processing------[ 0.0% ]")
 
     for img_path in input_path:
-
-        save_path = str(output_path /
-                        (Path(
-                            str(config.targetscale) + 'x-' + Path(img_path).name).stem + '.png'
-                         ))
+        save_path = str(output_path / (Path(str(config.targetscale) + "x-" + Path(img_path).name).stem + ".png"))
 
         i: int = 0
         while Path(save_path).is_file():
             logger.warning("Image already exists: " + save_path)
             i += 1
-            save_path = str(output_path /
-                            (Path(
-                                str(config.targetscale) + 'x-' + Path(img_path).name).stem + '(' + str(i) + ').png'
-                             ))
+            save_path = str(
+                output_path / (Path(str(config.targetscale) + "x-" + Path(img_path).name).stem + "(" + str(i) + ").png")
+            )
             logger.warning("Try to save to: " + save_path)
 
         if not Path(img_path).is_file():
@@ -66,7 +54,7 @@ def SR_queue():
                     img = img[:, :, :3]
 
                 if img is None:
-                    raise Exception('Failed to decode image.')
+                    raise Exception("Failed to decode image.")
             except Exception as e:
                 logger.error(str(e))
                 logger.warning("CV2 load image failed: " + img_path + ", skip. ")
@@ -85,6 +73,6 @@ def SR_queue():
                 # Merge processed RGB channels with processed alpha tensor
                 img = np.dstack((img, alpha_tensor[:, :, 0]))
 
-            cv2.imencode('.png', img)[1].tofile(save_path)
+            cv2.imencode(".png", img)[1].tofile(save_path)
 
             logger.success("______Process_Completed______: " + img_path)

@@ -1,10 +1,9 @@
 import pytest
-
-from src.utils.progressLog import PrintProgressLog
+from Final2x_core.src.utils.progressLog import PrintProgressLog
 
 
 class Test_PROGRESSLOG:
-    def test_set(self):
+    def test_set(self) -> None:
         p = PrintProgressLog()
         p.set(10, 2)
         assert p.Total == 20

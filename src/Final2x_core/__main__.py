@@ -2,19 +2,13 @@ import argparse
 import os
 import sys
 from pathlib import Path
+
 from loguru import logger
 
-try:
-    from src.SRqueue import SR_queue
-    from src.utils.getConfig import SRCONFIG
-except ImportError:
-    # for pip cli
-    from Final2x_core.src.SRqueue import SR_queue
-    from Final2x_core.src.utils.getConfig import SRCONFIG
+from Final2x_core.src.SRqueue import SR_queue
+from Final2x_core.src.utils.getConfig import SRCONFIG
 
-# python -m pytest --cov=src --cov-report=html
-# python -m PyInstaller -n Final2x-core -i assets/favicon.ico __main__.py
-if getattr(sys, 'frozen', False):
+if getattr(sys, "frozen", False):
     # frozen
     projectPATH = Path(sys.executable).parent.absolute()
 else:
@@ -38,11 +32,11 @@ if args.OP:
 
 def open_folder(path: str) -> None:
     try:
-        if sys.platform.startswith('win'):
+        if sys.platform.startswith("win"):
             os.startfile(path)
-        elif sys.platform.startswith('darwin'):
+        elif sys.platform.startswith("darwin"):
             os.system('open "{}"'.format(path))
-        elif sys.platform.startswith('linux'):
+        elif sys.platform.startswith("linux"):
             os.system('xdg-open "{}"'.format(path))
         else:
             logger.error("cannot open output folder")
@@ -51,7 +45,7 @@ def open_folder(path: str) -> None:
         logger.error("cannot open output folder")
 
 
-def main():
+def main() -> None:
     if args.LOG:
         # init logger
         logger.add(projectPATH / "logs" / "log-{time}.log", encoding="utf-8", retention="60 days")
@@ -69,12 +63,7 @@ def main():
         config.getConfigfromYaml(str(projectPATH / "config.yaml"), str(projectPATH / "models"))
 
     logger.info("config loaded")
-
-    # 还是不加比较好
-    # use cpu if gpu is not available
-    # if not cv2.ocl.haveOpenCL() and config.gpuid != -1:
-    #     logger.warning("gpu is not available, use cpu instead")
-    #     config.gpuid = -1
+    logger.debug(config.outputpath)
 
     SR_queue()
 
@@ -84,5 +73,5 @@ def main():
     open_folder(str(OP))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()

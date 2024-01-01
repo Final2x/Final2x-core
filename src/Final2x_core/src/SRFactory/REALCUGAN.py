@@ -1,26 +1,16 @@
+from Final2x_core.src.SRFactory.SRBaseClass import SRBaseClass
 from loguru import logger
-
-try:
-    from src.SRFactory.SRBaseClass import SRBaseClass
-except ImportError:
-    # for pip cli
-    from Final2x_core.src.SRFactory.SRBaseClass import SRBaseClass
 
 
 class REALCUGAN(SRBaseClass):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self._init_SR_class()
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-
-        try:
-            from src.SRncnn.REALCUGANncnn import REALCUGANncnn
-        except ImportError:
-            # for pip cli
-            from Final2x_core.src.SRncnn.REALCUGANncnn import Realcugan as REALCUGANncnn
+        from Final2x_core.src.SRncnn.REALCUGANncnn import REALCUGANncnn
 
         if self._model == "RealCUGAN-se":
             model_i = "models-se"
@@ -58,6 +48,11 @@ class REALCUGAN(SRBaseClass):
             logger.error("RealCUGAN model not implemented")
             raise NotImplementedError("RealCUGAN model not implemented")
 
-        self._SR_class = REALCUGANncnn(gpuid=self._gpuid, model=model_i, noise=self._modelnoise,
-                                       scale=self._modelscale, tta_mode=self._tta, )
+        self._SR_class = REALCUGANncnn(
+            gpuid=self._gpuid,
+            model=model_i,
+            noise=self._modelnoise,
+            scale=self._modelscale,
+            tta_mode=self._tta,
+        )
         logger.info("RealCUGAN model initialized")
