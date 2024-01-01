@@ -26,6 +26,9 @@ readme = "README.md"
 requires-python = ">=3.8, <3.13"
 version = "1.1.0"
 
+[project.scripts]
+Final2x-core = "Final2x_core.__main__:main"
+
 [project.urls]
 Homepage = "https://github.com/Final2x/Final2x-core"
 Repository = "https://github.com/Final2x/Final2x-core"
