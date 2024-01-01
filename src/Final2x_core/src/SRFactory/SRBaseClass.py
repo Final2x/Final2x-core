@@ -1,6 +1,6 @@
 import math
 from abc import ABC, abstractmethod
-from typing import final
+from typing import Any, final
 
 import cv2
 import numpy as np
@@ -10,7 +10,7 @@ from loguru import logger
 
 
 class SRBaseClass(ABC):
-    def __init__(self):
+    def __init__(self) -> None:
         config = SRCONFIG()
         self._targetscale: float = config.targetscale  # user upscale factor
         self._gpuid: int = config.gpuid  # gpu id, -1 for cpu
@@ -22,7 +22,7 @@ class SRBaseClass(ABC):
         self._sr_n = 1  # super-resolution times
         self._set_sr_n()
 
-        self._SR_class = None  # upscale model, override in child class
+        self._SR_class: Any = None  # upscale model, override in child class
 
         self._target_size: tuple[int, int] = (0, 0)  # target size of the image
 

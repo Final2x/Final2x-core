@@ -3,7 +3,7 @@ from loguru import logger
 
 
 class WAIFU2X(SRBaseClass):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__()
 
         self._init_SR_class()

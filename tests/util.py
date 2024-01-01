@@ -18,9 +18,9 @@ if os.environ.get("GITHUB_ACTIONS") == "true":
 
 def load_image() -> np.ndarray:
     if CONFIG()[0] == -1:
-        test_img: str = str(projectPATH / "assets" / "cpu-test.jpg")
+        test_img = str(projectPATH / "assets" / "cpu-test.jpg")
     else:
-        test_img: str = str(projectPATH / "assets" / "herta.jpg")
+        test_img = str(projectPATH / "assets" / "herta.jpg")
 
     img = cv2.imdecode(np.fromfile(test_img, dtype=np.uint8), cv2.IMREAD_COLOR)
     return img

@@ -1,5 +1,6 @@
-from pathlib import Path
 import os
+from pathlib import Path
+
 import yaml
 
 projectPATH = Path(__file__).resolve().parent.parent.absolute()
@@ -35,7 +36,7 @@ def gen_config():
         "modelnoise": 1,
         "outputpath": str(projectPATH / "assets"),
         "targetscale": 2,
-        "tta": False
+        "tta": False,
     }
 
     p_model = str(projectPATH / "src/Final2x_core/models")

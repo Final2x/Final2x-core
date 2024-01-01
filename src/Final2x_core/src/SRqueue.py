@@ -8,7 +8,7 @@ from Final2x_core.src.utils.progressLog import PrintProgressLog
 from loguru import logger
 
 
-def SR_queue():
+def SR_queue() -> None:
     """
     Super-resolution queue. Process all RGBA images according to the config.
     :return:

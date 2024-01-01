@@ -1,3 +1,5 @@
+from typing import Any
+
 from Final2x_core.src.utils.getConfig import SRCONFIG
 from loguru import logger
 
@@ -5,7 +7,7 @@ from loguru import logger
 class SRFactory:
     @staticmethod
     @logger.catch(reraise=True)
-    def getSR() -> object:
+    def getSR() -> Any:
         """
         get a SR model instance according to config
         :return:
@@ -14,17 +16,17 @@ class SRFactory:
         model = config.model
 
         if model in ["RealCUGAN-se", "RealCUGAN-pro"]:
-            from Final2x_core.src.SRFactory import REALCUGAN
+            from . import REALCUGAN
 
             return REALCUGAN()
 
         elif model in ["RealESRGAN-animevideov3", "RealESRGAN", "RealESRGAN-anime"]:
-            from Final2x_core.src.SRFactory import REALESRGAN
+            from . import REALESRGAN
 
             return REALESRGAN()
 
         elif model in ["Waifu2x-cunet", "Waifu2x-upconv_7_anime_style_art_rgb", "Waifu2x-upconv_7_photo"]:
-            from Final2x_core.src.SRFactory import WAIFU2X
+            from . import WAIFU2X
 
             return WAIFU2X()
 

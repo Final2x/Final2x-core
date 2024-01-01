@@ -4,7 +4,7 @@ from loguru import logger
 
 @singleton
 class PrintProgressLog:
-    def __init__(self):
+    def __init__(self) -> None:
         """
         Total: Total Process Time
         """

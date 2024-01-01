@@ -5,7 +5,7 @@
 groups = ["default", "lint", "test"]
 strategy = ["cross_platform", "inherit_metadata"]
 lock_version = "4.4.1"
-content_hash = "sha256:be37f88cdc85e6ad64ff9224da3bb478c4018c9084af8eb622b1d8f548d58335"
+content_hash = "sha256:20f528f0963f50a0c958c978f9af94a59ec73f8ddec09759fc1b0506fd23f6b2"
 
 [[package]]
 name = "altgraph"
@@ -1060,6 +1060,16 @@ dependencies = [
 files = [
     {file = "tqdm-4.66.1-py3-none-any.whl", hash = "sha256:d302b3c5b53d47bce91fea46679d9c3c6508cf6332229aa1e7d8653723793386"},
     {file = "tqdm-4.66.1.tar.gz", hash = "sha256:d88e651f9db8d8551a62556d3cff9e3034274ca5d66e93197cf2490e2dcb69c7"},
+]
+
+[[package]]
+name = "types-pyyaml"
+version = "6.0.12.12"
+summary = "Typing stubs for PyYAML"
+groups = ["test"]
+files = [
+    {file = "types-PyYAML-6.0.12.12.tar.gz", hash = "sha256:334373d392fde0fdf95af5c3f1661885fa10c52167b14593eb856289e1855062"},
+    {file = "types_PyYAML-6.0.12.12-py3-none-any.whl", hash = "sha256:c05bc6c158facb0676674b7f11fe3960db4f389718e19e62bd2b84d6205cfd24"},
 ]
 
 [[package]]

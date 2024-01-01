@@ -45,7 +45,7 @@ def open_folder(path: str) -> None:
         logger.error("cannot open output folder")
 
 
-def main():
+def main() -> None:
     if args.LOG:
         # init logger
         logger.add(projectPATH / "logs" / "log-{time}.log", encoding="utf-8", retention="60 days")
