@@ -49,8 +49,14 @@ lint = [
 test = [
   "pytest",
   "pytest-cov",
-  "scikit-image"
+  "scikit-image",
+  "requests",
+  "tqdm"
 ]
+
+[tool.pdm.scripts.download_models]
+call = "Final2x_core.models.download_models:download_all"
+help = "Download all models"
 
 [tool.pdm.scripts.lint]
 composite = [
@@ -62,7 +68,8 @@ help = "Check code style against linters"
 
 [tool.pdm.scripts.post_install]
 composite = [
-  "pre-commit install"
+  "pre-commit install",
+  "download_models"
 ]
 help = "Install the pre-commit hook"
 
