@@ -84,7 +84,7 @@ composite = [
 help = "Install the pre-commit hook"
 
 [tool.pdm.scripts.post_pyinstaller]
-call = "scripts.post_pyinstaller:copy_models_and_config"
+call = "scripts.post_pyinstaller:post_pyinstaller"
 help = "Copy models and config to the dist folder"
 
 [tool.pdm.scripts.pyinstaller]
