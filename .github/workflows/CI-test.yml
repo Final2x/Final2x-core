@@ -1,29 +1,29 @@
 name: CI-test
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths-ignore:
-      - '**.md'
-      - 'LICENSE'
+      - "**.md"
+      - "LICENSE"
 
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
     paths-ignore:
-      - '**.md'
-      - 'LICENSE'
+      - "**.md"
+      - "LICENSE"
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+env:
+  GITHUB_ACTIONS: true
 
 jobs:
   CI:
     strategy:
       matrix:
-        python-version: [ "3.9" ]
-        os-version: [ "windows-latest" , "ubuntu-20.04" , "macos-latest" ]
+        python-version: ["3.10"]
+        os-version: ["windows-latest", "ubuntu-20.04", "macos-latest"]
 
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -31,26 +31,22 @@ jobs:
         with:
           submodules: recursive
 
-      - uses: actions/setup-python@v4
+      - uses: pdm-project/setup-pdm@v3
+        name: Setup PDM
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
+          version: 2.11.1
+          prerelease: false
+          enable-pep582: false
+          allow-python-prereleases: false
+          update-python: true
 
       - name: vulkan dll
         if: matrix.os-version == 'windows-latest'
         run: echo F | xcopy .\assets\vulkan-1.dll C:\Windows\System32
 
-      - name: Install dependencies
-        run: |
-          pip install -r requirements.txt
-          cd tests
-          pip install -r test_requirements.txt
-
-      - name: Generate Test Config
-        run: |
-          cd tests
-          python CIsetconfig.py
-
       - name: Test
         run: |
-          python -m pytest
+          pdm install
+          pdm run test

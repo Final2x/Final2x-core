@@ -1,29 +1,29 @@
 name: pip-test
 
-# Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
   push:
-    branches: [ "main" ]
+    branches: ["main"]
     paths-ignore:
-      - '**.md'
-      - 'LICENSE'
+      - "**.md"
+      - "LICENSE"
 
   pull_request:
-    branches: [ "main" ]
+    branches: ["main"]
     paths-ignore:
-      - '**.md'
-      - 'LICENSE'
+      - "**.md"
+      - "LICENSE"
 
-  # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
+
+env:
+  GITHUB_ACTIONS: true
 
 jobs:
   pip-test:
     strategy:
       matrix:
         python-version: ["3.8", "3.9", "3.10", "3.11"]
-        os-version: [ "windows-latest" , "ubuntu-20.04" , "macos-latest" ]
+        os-version: ["windows-latest", "ubuntu-20.04", "macos-latest"]
 
     runs-on: ${{ matrix.os-version }}
     steps:
