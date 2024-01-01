@@ -1,16 +1,11 @@
 import pathlib
 
+from Final2x_core.src.utils.getConfig import SRCONFIG
 from realesrgan_ncnn_py import Realesrgan
-
-try:
-    from src.utils.getConfig import SRCONFIG
-except ImportError:
-    # for pip cli
-    from Final2x_core.src.utils.getConfig import SRCONFIG
 
 
 class REALESRGANncnn(Realesrgan):
-    def load(self, param_path: pathlib.Path = None, model_path: pathlib.Path = None, scale: int = 0) -> None:
+    def _load(self, param_path: pathlib.Path = None, model_path: pathlib.Path = None, scale: int = 0) -> None:
         """
         Load models from root models folder.
 

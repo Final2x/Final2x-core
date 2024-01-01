@@ -1,12 +1,7 @@
 import pathlib
 
+from Final2x_core.src.utils.getConfig import SRCONFIG
 from waifu2x_ncnn_py import Waifu2x
-
-try:
-    from src.utils.getConfig import SRCONFIG
-except ImportError:
-    # for pip cli
-    from Final2x_core.src.utils.getConfig import SRCONFIG
 
 
 class WAIFU2Xncnn(Waifu2x):

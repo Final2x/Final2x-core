@@ -4,13 +4,8 @@ from pathlib import Path
 from typing import Union
 
 import yaml
+from Final2x_core.src.utils.singleton import singleton
 from loguru import logger
-
-try:
-    from src.utils.singleton import singleton
-except ImportError:
-    # for pip cli
-    from Final2x_core.src.utils.singleton import singleton
 
 
 @singleton

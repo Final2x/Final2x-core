@@ -43,10 +43,10 @@ jobs:
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install Final2x-core pathlib
+          pip install Final2x-core
 
       - name: Test pip
         run: |
-          cd tests
-          python CIsetconfig.py
+          cd scripts
+          python gen_config.py
           python CItestpip.py

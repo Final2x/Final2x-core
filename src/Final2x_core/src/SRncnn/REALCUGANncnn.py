@@ -1,12 +1,7 @@
 import pathlib
 
+from Final2x_core.src.utils.getConfig import SRCONFIG
 from realcugan_ncnn_py import Realcugan
-
-try:
-    from src.utils.getConfig import SRCONFIG
-except ImportError:
-    # for pip cli
-    from Final2x_core.src.utils.getConfig import SRCONFIG
 
 
 class REALCUGANncnn(Realcugan):

@@ -1,16 +1,21 @@
 import json
 import math
 from pathlib import Path
-
+import os
 import cv2
 import numpy as np
 from skimage.metrics import structural_similarity
 
-from src.utils.getConfig import SRCONFIG
+from Final2x_core.src.utils.getConfig import SRCONFIG
 
+projectPATH = Path(__file__).resolve().parent.parent.absolute()
+
+_GPUID_ = 0
+# gpuid = -1 when in GitHub Actions
+if os.environ.get("GITHUB_ACTIONS") == "true":
+    _GPUID_ = -1
 
 def load_image() -> np.ndarray:
-    projectPATH = Path(__file__).resolve().parent.parent.absolute()
     if CONFIG()[0] == -1:
         test_img: str = str(projectPATH / "assets" / "cpu-test.jpg")
     else:
@@ -21,15 +26,7 @@ def load_image() -> np.ndarray:
 
 
 def CONFIG() -> tuple[int, str, str, str]:
-    projectPATH = Path(__file__).resolve().parent.parent.absolute()
-
-    gpuid: int = 0  # -1 for CPU, > 0 for GPU
-
-    gpuid = -1  # please comment this line if NOT TEST IN github actions
-
-    # use cpu if gpu is not available
-    if not cv2.ocl.haveOpenCL():
-        gpuid = -1
+    gpuid = _GPUID_
 
     p_dict = {
         "gpuid": gpuid,
@@ -56,8 +53,8 @@ def CONFIG() -> tuple[int, str, str, str]:
 
     p_json: str = json.dumps(p_dict)
 
-    p_model: str = str(projectPATH / "models")
-    p_yaml = str(projectPATH / "config.yaml")
+    p_model: str = str(projectPATH / "src/Final2x_core/models")
+    p_yaml = str(projectPATH / "src/Final2x_core/config.yaml")
 
     return gpuid, p_json, p_yaml, p_model
 

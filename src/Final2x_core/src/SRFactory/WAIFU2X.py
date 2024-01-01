@@ -1,10 +1,5 @@
+from Final2x_core.src.SRFactory.SRBaseClass import SRBaseClass
 from loguru import logger
-
-try:
-    from src.SRFactory.SRBaseClass import SRBaseClass
-except ImportError:
-    # for pip cli
-    from Final2x_core.src.SRFactory.SRBaseClass import SRBaseClass
 
 
 class WAIFU2X(SRBaseClass):

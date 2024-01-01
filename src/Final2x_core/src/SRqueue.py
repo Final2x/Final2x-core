@@ -2,17 +2,10 @@ from pathlib import Path
 
 import cv2
 import numpy as np
+from Final2x_core.src.SRFactory import SRFactory
+from Final2x_core.src.utils.getConfig import SRCONFIG
+from Final2x_core.src.utils.progressLog import PrintProgressLog
 from loguru import logger
-
-try:
-    from src.SRFactory import SRFactory
-    from src.utils.getConfig import SRCONFIG
-    from src.utils.progressLog import PrintProgressLog
-except ImportError:
-    # for pip cli
-    from Final2x_core.src.SRFactory import SRFactory
-    from Final2x_core.src.utils.getConfig import SRCONFIG
-    from Final2x_core.src.utils.progressLog import PrintProgressLog
 
 
 def SR_queue():
@@ -24,6 +17,7 @@ def SR_queue():
     input_path: list = config.inputpath
     output_path: Path = Path(config.outputpath) / "outputs"
     output_path.mkdir(parents=True, exist_ok=True)  # create output folder
+    print(str(output_path), "created.", str(config.outputpath))
     sr = SRFactory.getSR()
 
     logger.info("Processing------[ 0.0% ]")

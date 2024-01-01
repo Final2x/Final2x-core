@@ -4,15 +4,9 @@ from typing import final
 
 import cv2
 import numpy as np
+from Final2x_core.src.utils.getConfig import SRCONFIG
+from Final2x_core.src.utils.progressLog import PrintProgressLog
 from loguru import logger
-
-try:
-    from src.utils.getConfig import SRCONFIG
-    from src.utils.progressLog import PrintProgressLog
-except ImportError:
-    # for pip cli
-    from Final2x_core.src.utils.getConfig import SRCONFIG
-    from Final2x_core.src.utils.progressLog import PrintProgressLog
 
 
 class SRBaseClass(ABC):

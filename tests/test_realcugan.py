@@ -3,9 +3,10 @@ import pytest
 from tests.util import calculate_image_similarity, compare_image_size, getSRCONFIG, load_image
 
 
+
 class Test_REALCUGAN:
     def test_case_RealCUGAN_pro(self):
-        from src.SRFactory import REALCUGAN
+        from Final2x_core.src.SRFactory import REALCUGAN
 
         config = getSRCONFIG()
         config.model = "RealCUGAN-pro"
@@ -21,7 +22,7 @@ class Test_REALCUGAN:
                 assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_RealCUGAN_se(self):
-        from src.SRFactory import REALCUGAN
+        from Final2x_core.src.SRFactory import REALCUGAN
 
         config = getSRCONFIG()
         config.model = "RealCUGAN-se"
@@ -36,9 +37,9 @@ class Test_REALCUGAN:
                 assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_invalid_model(self):
-        from src.SRFactory import REALCUGAN
+        from Final2x_core.src.SRFactory import REALCUGAN
 
         config = getSRCONFIG()
         config.model = "sb"
         with pytest.raises(NotImplementedError):
-            SR = REALCUGAN()
+            REALCUGAN()

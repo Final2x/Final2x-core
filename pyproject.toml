@@ -23,7 +23,7 @@ dependencies = [
 license = {text = "BSD-3-Clause"}
 name = "Final2x-core"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.8, <3.13"
 version = "2.0.0"
 
 [project.urls]
@@ -51,12 +51,17 @@ test = [
   "pytest-cov",
   "scikit-image",
   "requests",
-  "tqdm"
+  "tqdm",
+  "pyinstaller~=6.3"
 ]
 
 [tool.pdm.scripts.download_models]
-call = "Final2x_core.models.download_models:download_all"
+call = "scripts.download_models:download_all"
 help = "Download all models"
+
+[tool.pdm.scripts.generate_config]
+call = "scripts.gen_config:gen_config"
+help = "Generate config file"
 
 [tool.pdm.scripts.lint]
 composite = [
@@ -69,9 +74,14 @@ help = "Check code style against linters"
 [tool.pdm.scripts.post_install]
 composite = [
   "pre-commit install",
+  "generate_config",
   "download_models"
 ]
 help = "Install the pre-commit hook"
+
+[tool.pdm.scripts.pyinstaller]
+cmd = "pyinstaller -n Final2x-core -i assets/favicon.ico src/Final2x_core/__main__.py"
+help = "Build the executable with PyInstaller"
 
 [tool.pdm.scripts.test]
 cmd = "pytest tests --cov=src --cov-report=xml --cov-report=html"

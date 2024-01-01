@@ -2,7 +2,7 @@ import base64
 
 import pytest
 
-from src.utils.getConfig import SRCONFIG
+from Final2x_core.src.utils.getConfig import SRCONFIG
 from tests.util import CONFIG
 
 

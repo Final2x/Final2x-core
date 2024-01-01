@@ -5,16 +5,9 @@ from pathlib import Path
 
 from loguru import logger
 
-try:
-    from src.SRqueue import SR_queue
-    from src.utils.getConfig import SRCONFIG
-except ImportError:
-    # for pip cli
-    from Final2x_core.src.SRqueue import SR_queue
-    from Final2x_core.src.utils.getConfig import SRCONFIG
+from Final2x_core.src.SRqueue import SR_queue
+from Final2x_core.src.utils.getConfig import SRCONFIG
 
-# python -m pytest --cov=src --cov-report=html
-# python -m PyInstaller -n Final2x-core -i assets/favicon.ico __main__.py
 if getattr(sys, "frozen", False):
     # frozen
     projectPATH = Path(sys.executable).parent.absolute()
@@ -70,12 +63,7 @@ def main():
         config.getConfigfromYaml(str(projectPATH / "config.yaml"), str(projectPATH / "models"))
 
     logger.info("config loaded")
-
-    # 还是不加比较好
-    # use cpu if gpu is not available
-    # if not cv2.ocl.haveOpenCL() and config.gpuid != -1:
-    #     logger.warning("gpu is not available, use cpu instead")
-    #     config.gpuid = -1
+    logger.debug(config.outputpath)
 
     SR_queue()
 

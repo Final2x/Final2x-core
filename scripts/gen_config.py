@@ -1,12 +1,17 @@
 from pathlib import Path
-
+import os
 import yaml
 
+projectPATH = Path(__file__).resolve().parent.parent.absolute()
 
-def GithubAction_CPU_setconfig():
-    projectPATH = Path(__file__).resolve().parent.parent.absolute()
+_GPUID_ = 0
+# gpuid = -1 when in GitHub Actions
+if os.environ.get("GITHUB_ACTIONS") == "true":
+    _GPUID_ = -1
 
-    gpuid: int = -1  # -1 for CPU, > 0 for GPU
+
+def gen_config():
+    gpuid = _GPUID_
 
     print(f"gpuid: {gpuid}")
 
@@ -30,11 +35,11 @@ def GithubAction_CPU_setconfig():
         "modelnoise": 1,
         "outputpath": str(projectPATH / "assets"),
         "targetscale": 2,
-        "tta": True,
+        "tta": False
     }
 
-    p_model: str = str(projectPATH / "models")
-    p_yaml = str(projectPATH / "config.yaml")
+    p_model = str(projectPATH / "src/Final2x_core/models")
+    p_yaml = str(projectPATH / "src/Final2x_core/config.yaml")
 
     print(f"p_model: {p_model}")
     print(f"p_yaml: {p_yaml}")
@@ -44,4 +49,4 @@ def GithubAction_CPU_setconfig():
 
 
 if __name__ == "__main__":
-    GithubAction_CPU_setconfig()
+    gen_config()

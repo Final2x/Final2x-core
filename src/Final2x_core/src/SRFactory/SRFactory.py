@@ -9,11 +9,7 @@ class SRFactory:
         get a SR model instance according to config
         :return:
         """
-        try:
-            from src.utils.getConfig import SRCONFIG
-        except ImportError:
-            # for pip cli
-            from Final2x_core.src.utils.getConfig import SRCONFIG
+        from Final2x_core.src.utils.getConfig import SRCONFIG
 
         config = SRCONFIG()
         model = config.model
