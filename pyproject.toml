@@ -79,6 +79,10 @@ composite = [
 ]
 help = "Install the pre-commit hook"
 
+[tool.pdm.scripts.post_pyinstaller]
+call = "scripts.post_pyinstaller:copy_models_and_config"
+help = "Copy models and config to the dist folder"
+
 [tool.pdm.scripts.pyinstaller]
 cmd = "pyinstaller -n Final2x-core -i assets/favicon.ico src/Final2x_core/__main__.py"
 help = "Build the executable with PyInstaller"

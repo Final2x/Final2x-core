@@ -1,4 +1,5 @@
-from src.SRqueue import SR_queue
+from Final2x_core.src.SRqueue import SR_queue
+
 from tests.util import getSRCONFIG
 
 

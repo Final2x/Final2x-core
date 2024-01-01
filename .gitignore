@@ -166,3 +166,4 @@ cython_debug/
 /src/Final2x_core/models/RealESRGAN/
 /src/Final2x_core/models/RealCUGAN/
 /assets/outputs/
+/src/Final2x_core/config.yaml

@@ -10,11 +10,7 @@ class REALESRGAN(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-        try:
-            from src.SRncnn.REALESRGANncnn import REALESRGANncnn
-        except ImportError:
-            # for pip cli
-            from Final2x_core.src.SRncnn.REALESRGANncnn import Realesrgan as REALESRGANncnn
+        from Final2x_core.src.SRncnn.REALESRGANncnn import REALESRGANncnn
 
         # model_dict = {
         #     0: {"param": "realesr-animevideov3-x2.param", "bin": "realesr-animevideov3-x2.bin", "scale": 2},

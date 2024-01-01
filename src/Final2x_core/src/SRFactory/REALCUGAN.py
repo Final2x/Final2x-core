@@ -10,11 +10,7 @@ class REALCUGAN(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-        try:
-            from src.SRncnn.REALCUGANncnn import REALCUGANncnn
-        except ImportError:
-            # for pip cli
-            from Final2x_core.src.SRncnn.REALCUGANncnn import Realcugan as REALCUGANncnn
+        from Final2x_core.src.SRncnn.REALCUGANncnn import REALCUGANncnn
 
         if self._model == "RealCUGAN-se":
             model_i = "models-se"

@@ -1,6 +1,6 @@
-from src.utils.getConfig import SRCONFIG
-from src.utils.progressLog import PrintProgressLog
-from src.utils.singleton import singleton
+from Final2x_core.src.utils.getConfig import SRCONFIG
+from Final2x_core.src.utils.progressLog import PrintProgressLog
+from Final2x_core.src.utils.singleton import singleton
 
 
 class Test_SINGLETON:

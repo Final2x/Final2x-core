@@ -2,14 +2,13 @@ import sys
 
 import pytest
 
-from tests.util import CONFIG, calculate_image_similarity, compare_image_size, getSRCONFIG, load_image
+from tests.util import calculate_image_similarity, compare_image_size, getSRCONFIG, load_image
 
 
 @pytest.mark.skipif(sys.platform == "darwin", reason="Skipping test when running on macOS")
 class Test_REALESRGAN:
-    @pytest.mark.skipif(CONFIG()[0] == -1, reason="Skipping test due to use CPU")
     def test_case_RealESRGAN_animevideov3(self):
-        from src.SRFactory import REALESRGAN
+        from Final2x_core.src.SRFactory import REALESRGAN
 
         config = getSRCONFIG()
         config.model = "RealESRGAN-animevideov3"
@@ -21,9 +20,8 @@ class Test_REALESRGAN:
             assert calculate_image_similarity(img1, img2)
             assert compare_image_size(img1, img2, config.targetscale)
 
-    @pytest.mark.skipif(CONFIG()[0] == -1, reason="Skipping test due to use CPU")
     def test_case_RealESRGAN_anime(self):
-        from src.SRFactory import REALESRGAN
+        from Final2x_core.src.SRFactory import REALESRGAN
 
         config = getSRCONFIG()
         config.model = "RealESRGAN-anime"
@@ -35,9 +33,8 @@ class Test_REALESRGAN:
             assert calculate_image_similarity(img1, img2)
             assert compare_image_size(img1, img2, config.targetscale)
 
-    @pytest.mark.skipif(CONFIG()[0] == -1, reason="Skipping test due to use CPU")
     def test_case_RealESRGAN(self):
-        from src.SRFactory import REALESRGAN
+        from Final2x_core.src.SRFactory import REALESRGAN
 
         config = getSRCONFIG()
         config.model = "RealESRGAN"
@@ -50,9 +47,9 @@ class Test_REALESRGAN:
             assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_invalid_model(self):
-        from src.SRFactory import REALESRGAN
+        from Final2x_core.src.SRFactory import REALESRGAN
 
         config = getSRCONFIG()
         config.model = "sb"
         with pytest.raises(NotImplementedError):
-            SR = REALESRGAN()
+            _ = REALESRGAN()

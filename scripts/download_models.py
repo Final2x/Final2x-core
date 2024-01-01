@@ -2,15 +2,16 @@
 import os
 import shutil
 import zipfile
-from typing import Dict
 from pathlib import Path
+from typing import Dict
+
 import requests
 import tqdm
 
 model_dict: Dict[str, str] = {
     "RealCUGAN": "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/RealCUGAN.zip",
     "RealESRGAN": "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/RealESRGAN.zip",
-    "Waifu2x": "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/Waifu2x.zip"
+    "Waifu2x": "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/Waifu2x.zip",
 }
 
 projectPATH = Path(__file__).resolve().parent.parent.absolute()
@@ -41,7 +42,9 @@ def download_model(model_name: str) -> None:
 
 
 def download_all() -> None:
+    print("-" * 50)
     print("Downloading models...")
+    print("-" * 50)
     for model_name in tqdm.tqdm(model_dict.keys()):
         download_model(model_name)
 

@@ -10,11 +10,7 @@ class WAIFU2X(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-        try:
-            from src.SRncnn.WAIFU2Xncnn import WAIFU2Xncnn
-        except ImportError:
-            # for pip cli
-            from Final2x_core.src.SRncnn.WAIFU2Xncnn import Waifu2x as WAIFU2Xncnn
+        from Final2x_core.src.SRncnn.WAIFU2Xncnn import WAIFU2Xncnn
 
         # waifu2x model name, can be "models-cunet",
         # "models-upconv_7_anime_style_art_rgb" and

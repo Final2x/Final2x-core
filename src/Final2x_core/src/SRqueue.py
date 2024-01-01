@@ -17,7 +17,6 @@ def SR_queue():
     input_path: list = config.inputpath
     output_path: Path = Path(config.outputpath) / "outputs"
     output_path.mkdir(parents=True, exist_ok=True)  # create output folder
-    print(str(output_path), "created.", str(config.outputpath))
     sr = SRFactory.getSR()
 
     logger.info("Processing------[ 0.0% ]")

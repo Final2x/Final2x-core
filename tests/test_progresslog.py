@@ -1,6 +1,5 @@
 import pytest
-
-from src.utils.progressLog import PrintProgressLog
+from Final2x_core.src.utils.progressLog import PrintProgressLog
 
 
 class Test_PROGRESSLOG:

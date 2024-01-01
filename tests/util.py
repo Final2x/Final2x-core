@@ -1,12 +1,12 @@
 import json
 import math
-from pathlib import Path
 import os
+from pathlib import Path
+
 import cv2
 import numpy as np
-from skimage.metrics import structural_similarity
-
 from Final2x_core.src.utils.getConfig import SRCONFIG
+from skimage.metrics import structural_similarity
 
 projectPATH = Path(__file__).resolve().parent.parent.absolute()
 
@@ -14,6 +14,7 @@ _GPUID_ = 0
 # gpuid = -1 when in GitHub Actions
 if os.environ.get("GITHUB_ACTIONS") == "true":
     _GPUID_ = -1
+
 
 def load_image() -> np.ndarray:
     if CONFIG()[0] == -1:

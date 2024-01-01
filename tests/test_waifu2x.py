@@ -2,14 +2,13 @@ import sys
 
 import pytest
 
-from tests.util import CONFIG, calculate_image_similarity, compare_image_size, getSRCONFIG, load_image
+from tests.util import calculate_image_similarity, compare_image_size, getSRCONFIG, load_image
 
 
 @pytest.mark.skipif(sys.platform == "darwin", reason="Skipping test when running on macOS")
 class Test_WAIFU2X:
-    @pytest.mark.skipif(sys.platform == "linux" and CONFIG()[0] == -1, reason="Skipping test when running on Linux CPU")
     def test_case_Waifu2x_cunet(self):
-        from src.SRFactory import WAIFU2X
+        from Final2x_core.src.SRFactory import WAIFU2X
 
         config = getSRCONFIG()
         config.model = "Waifu2x-cunet"
@@ -24,7 +23,7 @@ class Test_WAIFU2X:
                 assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_Waifu2x_upconv_7_anime_style_art_rgb(self):
-        from src.SRFactory import WAIFU2X
+        from Final2x_core.src.SRFactory import WAIFU2X
 
         config = getSRCONFIG()
         config.model = "Waifu2x-upconv_7_anime_style_art_rgb"
@@ -39,7 +38,7 @@ class Test_WAIFU2X:
                 assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_Waifu2x_upconv_7_photo(self):
-        from src.SRFactory import WAIFU2X
+        from Final2x_core.src.SRFactory import WAIFU2X
 
         config = getSRCONFIG()
         config.model = "Waifu2x-upconv_7_photo"
@@ -54,9 +53,9 @@ class Test_WAIFU2X:
                 assert compare_image_size(img1, img2, config.targetscale)
 
     def test_case_invalid_model(self):
-        from src.SRFactory import WAIFU2X
+        from Final2x_core.src.SRFactory import WAIFU2X
 
         config = getSRCONFIG()
         config.model = "sb"
         with pytest.raises(NotImplementedError):
-            SR = WAIFU2X()
+            _ = WAIFU2X()
