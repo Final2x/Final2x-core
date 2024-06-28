@@ -5,7 +5,7 @@ from pathlib import Path
 
 from loguru import logger
 
-from Final2x_core.download_models import download_all
+from Final2x_core.download_models import download_all, recheck_all
 from Final2x_core.src.SRqueue import SR_queue
 from Final2x_core.src.utils.getConfig import SRCONFIG
 
@@ -50,7 +50,7 @@ def open_folder(path: str) -> None:
 
 
 def main() -> None:
-    download_all()  # check if models are downloaded
+    recheck_all()  # check if models are downloaded
 
     if args.LOG:
         # init logger

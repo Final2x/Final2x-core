@@ -100,8 +100,11 @@ def download_all() -> None:
     print("-" * 50)
     for model_name in tqdm.tqdm(model_dict.keys()):
         download_model(model_name)
-
     print("Rechecking models hash...")
+    recheck_all()
+
+
+def recheck_all() -> None:
     for model_name in model_dict.keys():
         download_model(model_name)
 
