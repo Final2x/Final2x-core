@@ -21,7 +21,7 @@ else:
 # model name, url and hash
 model_dict: Dict[str, List[str]] = {
     "RealCUGAN": [
-        "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/RealCUGAN.zip",
+        "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/RealCUGAN-240628.zip",
         "3392e740cda8c9e5308f33749da7ea76c1dbb972f4959db7745cfadbb8e0079f",
     ],
     "RealESRGAN": [
@@ -29,7 +29,7 @@ model_dict: Dict[str, List[str]] = {
         "424ed35216c7045f28a48c04cb9bda96bba5e0abe45419eaf8914005d98c18fb",
     ],
     "Waifu2x": [
-        "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/Waifu2x.zip",
+        "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/Waifu2x-240628.zip",
         "9db18b02102ab927fe89dc1689e599198226d585c6d2f80137347312e7ec48da",
     ],
 }
