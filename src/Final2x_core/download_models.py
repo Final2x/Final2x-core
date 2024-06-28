@@ -78,6 +78,7 @@ def download_model(model_name: str) -> None:
             print(f"Model {model_name} exists but hash does not match, Re_downloading...")
             shutil.rmtree(model_path)
 
+    print(f"\nDownloading {model_name}...")
     url = model_dict[model_name][0]
     r = requests.get(url, stream=True)
 
