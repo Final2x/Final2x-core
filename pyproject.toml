@@ -24,7 +24,7 @@ license = {text = "BSD-3-Clause"}
 name = "Final2x-core"
 readme = "README.md"
 requires-python = ">=3.8, <3.13"
-version = "2.0.0"
+version = "2.0.1"
 
 [project.scripts]
 Final2x-core = "Final2x_core.__main__:main"
@@ -56,11 +56,12 @@ test = [
   "requests",
   "tqdm",
   "types-PyYAML",
+  "types-requests",
   "pyinstaller~=6.3"
 ]
 
 [tool.pdm.scripts.download_models]
-call = "scripts.download_models:download_all"
+call = "Final2x_core.download_models:download_all"
 help = "Download all models"
 
 [tool.pdm.scripts.generate_config]

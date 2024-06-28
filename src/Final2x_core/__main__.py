@@ -5,6 +5,7 @@ from pathlib import Path
 
 from loguru import logger
 
+from Final2x_core.download_models import download_all
 from Final2x_core.src.SRqueue import SR_queue
 from Final2x_core.src.utils.getConfig import SRCONFIG
 
@@ -25,11 +26,11 @@ parser.add_argument("-b", "--BASE64", help="base64 string for config json", type
 parser.add_argument("-j", "--JSON", help="JSON string for config", type=str)
 parser.add_argument("-y", "--YAML", help="yaml config file path", type=str)
 parser.add_argument("-l", "--LOG", help="save log", action="store_true")
-parser.add_argument("-o", "--OP", help="check install", action="store_true")
+parser.add_argument("-c", "--CACHE", help="cache models", action="store_true")
 args = parser.parse_args()
 
-if args.OP:
-    print("114514")
+if args.CACHE:
+    download_all()
     exit(0)
 
 
@@ -49,6 +50,8 @@ def open_folder(path: str) -> None:
 
 
 def main() -> None:
+    download_all()  # check if models are downloaded
+
     if args.LOG:
         # init logger
         logger.add(projectPATH / "logs" / "log-{time}.log", encoding="utf-8", retention="60 days")
