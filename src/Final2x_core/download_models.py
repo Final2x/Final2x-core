@@ -54,12 +54,12 @@ def hash_directory(directory_path: Path) -> str:
     for root, _, files in os.walk(directory_path):
         for filename in files:
             filepath = Path(os.path.join(root, filename))
-            files_list.append((filepath, hash_file(filepath)))
+            files_list.append(hash_file(filepath))
 
     # Sort by file path to ensure consistency of the result
     files_list.sort(key=lambda x: x[0])
     # Concatenate the paths and hashes of all files
-    concatenated_str = "".join([f"{path}:{hash}\n" for path, hash in files_list])
+    concatenated_str = "".join([f"{hash}\n" for hash in files_list])
     # Calculate the final hash value
     final_hash_sha256 = hashlib.sha256()
     final_hash_sha256.update(concatenated_str.encode("utf-8"))
