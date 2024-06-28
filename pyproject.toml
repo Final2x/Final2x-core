@@ -18,7 +18,9 @@ dependencies = [
   "realesrgan-ncnn-py>=2.0.0",
   "waifu2x-ncnn-py>=2.0.0",
   "PyYAML~=6.0",
-  "loguru~=0.7.0"
+  "loguru~=0.7.0",
+  "requests~=2.26.0",
+  "tqdm~=4.62.0"
 ]
 license = {text = "BSD-3-Clause"}
 name = "Final2x-core"
@@ -53,8 +55,6 @@ test = [
   "pytest",
   "pytest-cov",
   "scikit-image",
-  "requests",
-  "tqdm",
   "types-PyYAML",
   "types-requests",
   "pyinstaller~=6.3"
