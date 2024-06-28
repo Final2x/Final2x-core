@@ -22,15 +22,15 @@ else:
 model_dict: Dict[str, List[str]] = {
     "RealCUGAN": [
         "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/RealCUGAN.zip",
-        "613037e2c62858e794cf38c0ef6eda0838420a7a8fc1eb3616cf5689a133942a",
+        "3392e740cda8c9e5308f33749da7ea76c1dbb972f4959db7745cfadbb8e0079f",
     ],
     "RealESRGAN": [
         "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/RealESRGAN.zip",
-        "22c36400e4372cc7caca0d2096ac2bd3b2e2c1cf92bf4cdeb92f4405648af22f",
+        "79fff8b46b84c3f4b4da46837fb8f9630538e5936a8d9bc45697cceb6d29361f",
     ],
     "Waifu2x": [
         "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/Waifu2x.zip",
-        "f7519381dfc83e4a98286b96cf48838ca03a862bebdf598393fb9701ec821fec",
+        "9db18b02102ab927fe89dc1689e599198226d585c6d2f80137347312e7ec48da",
     ],
 }
 
