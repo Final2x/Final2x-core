@@ -25,8 +25,8 @@ model_dict: Dict[str, List[str]] = {
         "3392e740cda8c9e5308f33749da7ea76c1dbb972f4959db7745cfadbb8e0079f",
     ],
     "RealESRGAN": [
-        "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/RealESRGAN.zip",
-        "79fff8b46b84c3f4b4da46837fb8f9630538e5936a8d9bc45697cceb6d29361f",
+        "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/RealESRGAN-240628.zip",
+        "424ed35216c7045f28a48c04cb9bda96bba5e0abe45419eaf8914005d98c18fb",
     ],
     "Waifu2x": [
         "https://github.com/Tohrusky/model-zoo/releases/download/v2.0.0/Waifu2x.zip",
