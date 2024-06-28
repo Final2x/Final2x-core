@@ -35,6 +35,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
           architecture: x64
+        continue-on-error: true
 
       - name: vulkan dll
         if: matrix.os-version == 'windows-latest'
