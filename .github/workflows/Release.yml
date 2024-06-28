@@ -32,6 +32,7 @@ jobs:
         name: Setup PDM
         with:
           python-version: ${{ matrix.python-version }}
+        continue-on-error: true
 
       - name: vulkan dll
         if: matrix.os-version == 'windows-latest'

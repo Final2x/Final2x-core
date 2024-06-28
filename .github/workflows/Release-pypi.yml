@@ -22,6 +22,7 @@ jobs:
         name: Setup PDM
         with:
           python-version: ${{ matrix.python-version }}
+        continue-on-error: true
 
       - name: Check Python version
         run: |
