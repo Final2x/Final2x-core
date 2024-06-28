@@ -46,6 +46,19 @@ class Test_REALESRGAN:
             assert calculate_image_similarity(img1, img2)
             assert compare_image_size(img1, img2, config.targetscale)
 
+    def test_case_APISR_RRDB(self) -> None:
+        from Final2x_core.src.SRFactory import REALESRGAN
+
+        config = getSRCONFIG()
+        config.model = "APISR-RRDB"  # type: ignore
+        for i in range(3, 6):
+            config.modelscale = i  # type: ignore
+            SR = REALESRGAN()
+            img1 = load_image()
+            img2 = SR.process(img1)
+            assert calculate_image_similarity(img1, img2)
+            assert compare_image_size(img1, img2, config.targetscale)
+
     def test_case_invalid_model(self) -> None:
         from Final2x_core.src.SRFactory import REALESRGAN
 

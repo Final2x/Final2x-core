@@ -20,7 +20,7 @@ class SRFactory:
 
             return REALCUGAN()
 
-        elif model in ["RealESRGAN-animevideov3", "RealESRGAN", "RealESRGAN-anime"]:
+        elif model in ["RealESRGAN-animevideov3", "RealESRGAN", "RealESRGAN-anime", "APISR-RRDB"]:
             from . import REALESRGAN
 
             return REALESRGAN()

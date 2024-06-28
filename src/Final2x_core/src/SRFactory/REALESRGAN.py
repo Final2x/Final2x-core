@@ -18,6 +18,7 @@ class REALESRGAN(SRBaseClass):
         #     2: {"param": "realesr-animevideov3-x4.param", "bin": "realesr-animevideov3-x4.bin", "scale": 4},
         #     3: {"param": "realesrgan-x4plus-anime.param", "bin": "realesrgan-x4plus-anime.bin", "scale": 4},
         #     4: {"param": "realesrgan-x4plus.param", "bin": "realesrgan-x4plus.bin", "scale": 4}
+        #     5: {"param": "APISR-RRDB-x4.param", "bin": "APISR-RRDB-x4.bin", "scale": 4}
         # }
         model_i = 0
         if self._model == "RealESRGAN-animevideov3":
@@ -46,6 +47,14 @@ class REALESRGAN(SRBaseClass):
             else:
                 logger.warning("RealESRGAN only support scale 4. Auto set to 4")
                 model_i = 4
+                self._reset_modelscale(4)
+
+        elif self._model == "APISR-RRDB":
+            if self._modelscale == 4:
+                model_i = 5
+            else:
+                logger.warning("APISR-RRDB only support scale 4. Auto set to 4")
+                model_i = 5
                 self._reset_modelscale(4)
 
         else:

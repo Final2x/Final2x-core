@@ -94,6 +94,10 @@ Pass the config json string to the program through the `-j` parameter.
     - scale: 2, 3
     - noise: -1, 0, 3
 
+- APISR-RRDB:
+    - model: "APISR-RRDB"
+    - scale: 4
+
 - RealESRGAN-animevideov3:
     - model: "RealESRGAN-animevideov3"
     - scale: 2, 3, 4
