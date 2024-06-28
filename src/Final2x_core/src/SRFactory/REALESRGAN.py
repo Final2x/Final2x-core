@@ -10,10 +10,8 @@ class REALESRGAN(SRBaseClass):
 
     @logger.catch(reraise=True)
     def _init_SR_class(self) -> None:
-        if self._isfrozen:
-            from Final2x_core.src.SRncnn.REALESRGANncnn import REALESRGANncnn
-        else:
-            from realesrgan_ncnn_py import Realesrgan as REALESRGANncnn  # type: ignore
+        from Final2x_core.src.SRncnn.REALESRGANncnn import REALESRGANncnn
+
         # model_dict = {
         #     0: {"param": "realesr-animevideov3-x2.param", "bin": "realesr-animevideov3-x2.bin", "scale": 2},
         #     1: {"param": "realesr-animevideov3-x3.param", "bin": "realesr-animevideov3-x3.bin", "scale": 3},
