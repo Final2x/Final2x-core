@@ -20,7 +20,7 @@ jobs:
     strategy:
       matrix:
         python-version: ["3.10"]
-        os-version: ["macos-latest", "windows-latest", "ubuntu-20.04"]
+        os-version: ["windows-latest", "ubuntu-20.04", "macos-13", "macos-14"]
 
     runs-on: ${{ matrix.os-version }}
     steps:
@@ -49,16 +49,28 @@ jobs:
           cd dist\Final2x-core
           7z a -r Final2x-core-${{ matrix.os-version }}.zip *
 
-      - name: zip-unix
-        if: matrix.os-version != 'windows-latest'
+      - name: zip-linux
+        if: matrix.os-version == 'ubuntu-20.04'
         run: |
           cd dist/Final2x-core
           zip -9 -r Final2x-core-${{ matrix.os-version }}.zip ./*
 
+      - name: zip-macos-x64
+        if: matrix.os-version == 'macos-13'
+        run: |
+          cd dist/Final2x-core
+          zip -9 -r Final2x-core-macos-x64.zip ./*
+
+      - name: zip-macos-arm64
+        if: matrix.os-version == 'macos-14'
+        run: |
+          cd dist/Final2x-core
+          zip -9 -r Final2x-core-macos-arm64.zip ./*
+
       - name: upload
         uses: actions/upload-artifact@v3
         with:
-          path: dist/Final2x-core/Final2x-core-${{ matrix.os-version }}.zip
+          path: dist/Final2x-core/*.zip
 
   Release:
     needs: [setup, build]
