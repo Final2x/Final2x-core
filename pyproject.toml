@@ -26,7 +26,7 @@ license = {text = "BSD-3-Clause"}
 name = "Final2x-core"
 readme = "README.md"
 requires-python = ">=3.8, <3.13"
-version = "2.0.2"
+version = "2.1.0"
 
 [project.scripts]
 Final2x-core = "Final2x_core.__main__:main"
