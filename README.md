@@ -34,7 +34,7 @@ pip install Final2x-core
 # Use
 
 ```shell
-usage: Final2x-core [-h] [-b BASE64] [-j JSON] [-y YAML] [-o]
+usage: Final2x-core [-h] [-b BASE64] [-j JSON] [-y YAML] [-l] [-c] [-n]
 
 when para is not specified, the config.yaml file in the directory will be read automatically
 
@@ -46,6 +46,7 @@ optional arguments:
   -y YAML, --YAML YAML  yaml config file path
   -l, --LOG             save log
   -c, --CACHE           cache models
+  -n, --NOTOPENFOLDER   don't open output folder
 ```
 
 # Config
