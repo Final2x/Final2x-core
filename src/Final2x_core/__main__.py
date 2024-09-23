@@ -27,6 +27,7 @@ parser.add_argument("-j", "--JSON", help="JSON string for config", type=str)
 parser.add_argument("-y", "--YAML", help="yaml config file path", type=str)
 parser.add_argument("-l", "--LOG", help="save log", action="store_true")
 parser.add_argument("-c", "--CACHE", help="cache models", action="store_true")
+parser.add_argument("-n", "--NOTOPENFOLDER", help="don't open output folder", action="store_true")
 args = parser.parse_args()
 
 if args.CACHE:
@@ -79,8 +80,9 @@ def main() -> None:
 
     logger.success("______SR_COMPLETED______")
 
-    OP = Path(config.outputpath) / "outputs"
-    open_folder(str(OP))
+    if not args.NOTOPENFOLDER:
+        OP = Path(config.outputpath) / "outputs"
+        open_folder(str(OP))
 
 
 if __name__ == "__main__":
