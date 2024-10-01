@@ -96,6 +96,6 @@ def compare_image_size(image1: np.ndarray, image2: np.ndarray, t: float) -> bool
     :param t: targetscale
     :return:
     """
-    target_size = (math.ceil(image1.shape[1] * t), math.ceil(image1.shape[0] * t))
+    target_size = (math.ceil(image1.shape[0] * t), math.ceil(image1.shape[1] * t))
 
     return image2.shape[0] == target_size[0] and image2.shape[1] == target_size[1]
